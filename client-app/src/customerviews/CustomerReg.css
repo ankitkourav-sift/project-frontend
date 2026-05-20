@@ -1,0 +1,131 @@
+/* 🔥 FULL PAGE */
+.cr-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #0f172a, #020617);
+  padding: 20px;
+}
+
+/* 🔥 CARD */
+.cr-form {
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(15px);
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* 🔥 HEADER */
+.cr-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #38bdf8;
+  letter-spacing: 1px;
+}
+
+/* 🔥 STATUS */
+.cr-form p {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* 🔥 INPUTS */
+.cr-form input,
+.cr-form select {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+
+  transition: 0.3s;
+}
+
+/* 🔥 INPUT FOCUS */
+.cr-form input:focus,
+.cr-form select:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56,189,248,0.6);
+}
+
+/* 🔥 PLACEHOLDER */
+.cr-form input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* 🔥 ERROR */
+.cr-form span {
+  font-size: 12px;
+  color: #f87171;
+}
+
+/* 🔥 IMAGE PREVIEW */
+.cr-form img {
+  margin-top: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.cr-form img:hover {
+  transform: scale(1.05);
+}
+
+/* 🔥 BUTTON */
+.cr-form button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(45deg, #2563eb, #38bdf8);
+  color: #fff;
+
+  font-weight: bold;
+  font-size: 15px;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* 🔥 BUTTON HOVER */
+.cr-form button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+/* 🔥 FADE ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🔥 MOBILE */
+@media (max-width: 500px) {
+  .cr-form {
+    padding: 20px;
+  }
+}

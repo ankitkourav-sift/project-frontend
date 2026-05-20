@@ -1,0 +1,65 @@
+/* ===== PANEL WRAPPER ===== */
+.mpanel-container {
+    padding: 20px;
+    background: #f4f6fb;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* TITLE */
+.mpanel-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* ACTION BAR */
+.mpanel-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+/* BUTTONS */
+.mpanel-actions button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #e0e0e0;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* ACTIVE BUTTON */
+.mpanel-actions button.active {
+    background: #1976d2;
+    color: white;
+    box-shadow: 0 4px 10px rgba(25,118,210,0.3);
+}
+
+/* HOVER EFFECT */
+.mpanel-actions button:hover {
+    transform: scale(1.05);
+}
+
+/* CONTENT BOX */
+.mpanel-content {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    min-height: 300px;
+}
+
+/* EMPTY MESSAGE */
+.mpanel-content p {
+    text-align: center;
+    font-size: 16px;
+    color: red;
+    font-weight: bold;
+}

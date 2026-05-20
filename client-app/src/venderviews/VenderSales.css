@@ -1,0 +1,189 @@
+/* ROOT CONTAINER (IMPORTANT) */
+.Vender-Sales-page {
+  padding: 20px;
+  background: #0f172a;
+  min-height: 100vh;
+  color: #fff;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* HEADER */
+.Vender-Sales-page header {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* BUTTON */
+.Vender-Sales-page .venderbtn {
+  background: #22c55e;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.Vender-Sales-page .venderbtn:hover {
+  background: #16a34a;
+  transform: scale(1.05);
+}
+
+/* FILTERS */
+.Vender-Sales-page .venderfilters input,
+.Vender-Sales-page .venderfilters button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.Vender-Sales-page .venderfilters input {
+  background: #1e293b;
+  color: #fff;
+}
+
+.Vender-Sales-page .venderfilters button {
+  background: #f43f5e;
+  color: #fff;
+  cursor: pointer;
+}
+
+.Vender-Sales-page .venderfilters button:hover {
+  background: #be123c;
+}
+
+/* SALES TABLE */
+.Vender-Sales-page .vendersaless table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: #1e293b;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.Vender-Sales-page .vendersaless th {
+  background: #334155;
+  padding: 10px;
+  text-align: center;
+  color: #38bdf8;
+}
+
+.Vender-Sales-page .vendersaless td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #334155;
+}
+
+.Vender-Sales-page .vendersaless tr:hover {
+  background: #0f172a;
+}
+
+/* IMAGE */
+.Vender-Sales-page img {
+  border-radius: 6px;
+}
+
+/* PAGINATION */
+.Vender-Sales-page .venderpaggination button {
+  padding: 5px 10px;
+  margin: 3px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.Vender-Sales-page .venderpaggination button:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* SUMMARY TABLE */
+.Vender-Sales-page table {
+  margin-top: 15px;
+  border-collapse: collapse;
+}
+
+.Vender-Sales-page table th {
+  background: #1e293b;
+  color: #22c55e;
+}
+
+.Vender-Sales-page table td {
+  background: #020617;
+}
+
+/* TOTAL TEXT */
+.Vender-Sales-page h5 {
+  margin-top: 10px;
+  color: #facc15;
+}
+
+/* CHART */
+.Vender-Sales-page details summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+.Vender-Sales-page details summary:hover {
+  color: #0ea5e9;
+}
+
+/* POPUP */
+.Vender-Sales-page .venderpopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Vender-Sales-page .vendercontent {
+  background: #020617;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.Vender-Sales-page .venderpopupheader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* POPUP BUTTONS */
+.Vender-Sales-page .venderpop {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.Vender-Sales-page .venderbuttont {
+  background: #22c55e;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.Vender-Sales-page .venderclose {
+  background: #ef4444;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}

@@ -1,0 +1,135 @@
+/* PAGE CONTAINER */
+.vendor-sales-page {
+  padding: 20px;
+  background: #f5f7fb;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* TITLE */
+.vendor-sales-page h3 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+/* SELECT BOX */
+.vendor-sales-page select {
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* INPUT */
+.vendor-sales-page input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
+
+/* BUTTON */
+.vendor-sales-page button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.vendor-sales-page button:hover {
+  background: #1e40af;
+}
+
+/* TABLE WRAPPER LOOK */
+.vendor-sales-page table {
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* TABLE HEAD */
+.vendor-sales-page th {
+  background: #111827;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* TABLE ROW */
+.vendor-sales-page td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* ROW HOVER */
+.vendor-sales-page tr:hover {
+  background: #f1f5f9;
+  transition: 0.2s;
+}
+
+/* IMAGE */
+.vendor-sales-page img {
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+/* PAGINATION */
+.vendor-sales-page div {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.vendor-sales-page div button {
+  background: #10b981;
+}
+
+.vendor-sales-page div button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* SUMMARY TEXT */
+.vendor-sales-page h4 {
+  margin-top: 20px;
+  color: #111827;
+  text-align: center;
+}
+
+/* CHART AREA */
+.vendor-sales-page canvas {
+  margin-top: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .vendor-sales-page table {
+    font-size: 12px;
+  }
+
+  .vendor-sales-page button,
+  .vendor-sales-page input,
+  .vendor-sales-page select {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

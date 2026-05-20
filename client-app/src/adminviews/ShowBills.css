@@ -1,0 +1,127 @@
+/* PAGE BACKGROUND */
+body {
+  background: #f4f6f9;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* MAIN TITLE */
+h2 {
+  margin-top: 20px;
+  font-size: 26px;
+  color: #222;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* SELECT BOX */
+select {
+  padding: 10px 15px;
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-top: 10px;
+  font-size: 14px;
+  background: #fff;
+}
+
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+/* TABLE DESIGN */
+table {
+  width: 95%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+th {
+  background: linear-gradient(135deg, #1e1e2f, #343a40);
+  color: #fff;
+  padding: 14px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* CELLS */
+td {
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+/* ROW HOVER */
+tr:hover {
+  background: #f1f7ff;
+  transition: 0.3s;
+}
+
+/* PRODUCT IMAGE */
+td img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+td img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* BILL TOTAL ROW */
+tr:last-child td {
+  font-weight: bold;
+  background: #fff8e1;
+}
+
+/* GRAND TOTAL */
+.grand-total {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: green;
+}
+
+/* BUTTON */
+button {
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  color: white;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,123,255,0.4);
+}
+
+/* LOADING ANIMATION SPINNER SUPPORT */
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+/* EMPTY STATE */
+p {
+  font-size: 16px;
+  color: gray;
+  margin-top: 20px;
+}

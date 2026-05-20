@@ -1,0 +1,155 @@
+/* ===== ROOT ===== */
+:root {
+  --primary: #4f46e5;
+  --secondary: #06b6d4;
+  --bg: #eef2ff;
+  --text: #1f2937;
+  --error: #ef4444;
+  --success: #10b981;
+}
+
+/* ===== CONTAINER ===== */
+.cl-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #eef2ff, #ecfeff);
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== FORM CARD ===== */
+.cl-form {
+  width: 350px;
+  padding: 30px;
+  border-radius: 18px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  animation: popUp 0.5s ease;
+}
+
+/* ===== HEADER ===== */
+.cl-header {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+/* ===== INPUT ===== */
+.cl-input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+/* INPUT FOCUS EFFECT */
+.cl-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  transform: scale(1.02);
+}
+
+/* ===== ERROR ===== */
+.cl-error {
+  font-size: 12px;
+  color: var(--error);
+  margin-top: 3px;
+}
+
+/* ===== SUCCESS MESSAGE ===== */
+.cl-message {
+  color: var(--success);
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ===== REMEMBER ===== */
+.cl-remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+/* ===== BUTTON ===== */
+.cl-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* BUTTON HOVER */
+.cl-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* BUTTON CLICK */
+.cl-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===== FORGOT ===== */
+.cl-forgot {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--primary);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cl-forgot:hover {
+  text-decoration: underline;
+}
+
+/* ===== BACK ===== */
+.cl-back {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.cl-back:hover {
+  text-decoration: underline;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes popUp {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .cl-form {
+    width: 90%;
+    padding: 20px;
+  }
+}

@@ -1,0 +1,88 @@
+.home-container {
+  display: flex;
+  height: 100vh;
+  background: #0f172a;
+  color: white;
+}
+
+/* 🔥 SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #020617;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar button {
+  margin: 8px 0;
+  padding: 10px;
+  border: none;
+  background: #1e293b;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: left;
+  transition: 0.3s;
+}
+
+.sidebar button:hover {
+  background: #334155;
+}
+
+.sidebar .logout {
+  margin-top: auto;
+  background: #dc2626;
+}
+
+/* 🔥 MAIN AREA */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOPBAR */
+.topbar {
+  height: 70px;
+  background: #020617;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 15px;
+}
+
+.topbar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* 🔥 MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+}

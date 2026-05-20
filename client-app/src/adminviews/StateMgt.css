@@ -1,0 +1,116 @@
+/* Page Background */
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Heading */
+h3 {
+  color: white;
+  margin-top: 20px;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* Main Form Container */
+.myDiv {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 400px;
+  margin-top: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Table spacing */
+.myDiv table {
+  width: 100%;
+}
+
+.myDiv td {
+  padding: 10px;
+  font-weight: 500;
+}
+
+/* Inputs */
+.form-control {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
+
+.form-control:focus {
+  border-color: #2a5298;
+  outline: none;
+  box-shadow: 0 0 5px rgba(42, 82, 152, 0.5);
+}
+
+/* Buttons */
+button {
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+/* Primary Button Style */
+.btn-primary {
+  background: #2a5298;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1e3c72;
+  transform: scale(1.05);
+}
+
+/* Table Container */
+.myDiv2 {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 70%;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Data Table */
+.myDiv2 table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.myDiv2 th {
+  background: #2a5298;
+  color: white;
+  padding: 10px;
+}
+
+.myDiv2 td {
+  padding: 10px;
+  text-align: center;
+}
+
+/* Row Hover Effect */
+.myDiv2 tr:hover {
+  background-color: #f2f2f2;
+  transition: 0.3s;
+}
+
+/* Zebra Striping */
+.myDiv2 tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .myDiv, .myDiv2 {
+    width: 90%;
+  }
+}

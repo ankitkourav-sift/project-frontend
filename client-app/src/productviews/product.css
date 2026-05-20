@@ -1,0 +1,143 @@
+/* ===== PAGE WRAPPER ===== */
+.vp-page {
+    padding: 25px;
+    background: #f5f7fb;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* TITLE */
+.vp-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #222;
+    text-align: center;
+}
+
+/* FORM BOX */
+.vp-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 70%;
+    margin: auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* INPUTS */
+.vp-input,
+.vp-select,
+.vp-file {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.2s;
+}
+
+.vp-input:focus,
+.vp-select:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 5px rgba(25,118,210,0.3);
+}
+
+/* IMAGE PREVIEW */
+.vp-img-preview {
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+}
+
+/* BUTTONS */
+.vp-buttons {
+    margin-top: 15px;
+}
+
+.vp-buttons button {
+    padding: 8px 14px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.vp-buttons button:first-child {
+    background: #6c757d;
+    color: white;
+}
+
+.vp-buttons button:last-child {
+    background: #28a745;
+    color: white;
+}
+
+.vp-buttons button:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
+
+/* TABLE TITLE */
+.vp-subtitle {
+    text-align: center;
+    margin: 25px 0 10px;
+    font-size: 22px;
+    color: #333;
+}
+
+/* TABLE */
+.vp-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.vp-table th {
+    background: #1976d2;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.vp-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+/* TABLE IMAGE */
+.vp-table img {
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+/* ACTION BUTTONS */
+.vp-table button {
+    padding: 6px 10px;
+    margin: 3px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.vp-table button:first-child {
+    background: #ffc107;
+    color: black;
+}
+
+.vp-table button:last-child {
+    background: #dc3545;
+    color: white;
+}
+
+.vp-table button:hover {
+    opacity: 0.85;
+}

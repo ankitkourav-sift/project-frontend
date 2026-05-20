@@ -1,0 +1,94 @@
+.track-container {
+  width: 100%;
+  max-width: 850px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial;
+}
+
+.track-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #f8f5f5;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  background: #ff9800;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.progress {
+  height: 8px;
+  background: #eee;
+  border-radius: 10px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  transition: 0.4s ease;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.step {
+  text-align: center;
+  flex: 1;
+  opacity: 0.4;
+}
+
+.step.active {
+  opacity: 1;
+  color: #4facfe;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  border-radius: 50%;
+  background: #ddd;
+  line-height: 30px;
+  font-size: 12px;
+}
+
+.step.active .circle {
+  background: #4facfe;
+  color: white;
+}
+
+.loading, .empty {
+  text-align: center;
+  color: gray;
+  margin-top: 20px;
+}

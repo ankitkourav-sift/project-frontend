@@ -1,0 +1,119 @@
+/* PAGE */
+.customer-page {
+  padding: 30px;
+  min-height: 100vh;
+  background: #f4f7fb;
+}
+
+.customer-title {
+  font-weight: 700 !important;
+  color: #1e293b;
+  margin-bottom: 25px !important;
+}
+
+/* TABLE */
+.customer-table-container {
+  border-radius: 18px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+.customer-table-head {
+  background: linear-gradient(90deg, #1976d2, #1565c0);
+}
+
+.table-head-text {
+  color: white !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+}
+
+.customer-row {
+  transition: 0.3s;
+}
+
+.customer-row:hover {
+  background: #f1f5f9;
+}
+
+.customer-name {
+  font-weight: 600;
+  color: #334155;
+}
+
+/* BUTTONS */
+.status-btn {
+  border-radius: 30px !important;
+  padding: 6px 18px !important;
+  font-weight: 600 !important;
+}
+
+.view-btn {
+  border-radius: 10px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  background: #1976d2 !important;
+}
+
+.view-btn:hover {
+  background: #1259a7 !important;
+}
+
+.save-btn {
+  border-radius: 10px !important;
+  padding: 8px 22px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+}
+
+/* MODAL */
+.profile-title {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.profile-content {
+  padding-top: 15px !important;
+}
+
+.profile-actions {
+  padding: 16px 24px !important;
+}
+
+/* IMAGE */
+.profile-image-box {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-avatar {
+  width: 90px !important;
+  height: 90px !important;
+  border: 3px solid #1976d2;
+}
+
+.file-input {
+  border: 1px solid #cbd5e1;
+  padding: 10px;
+  border-radius: 10px;
+  background: white;
+}
+
+/* LOADING */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}

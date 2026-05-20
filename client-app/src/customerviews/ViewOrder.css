@@ -1,0 +1,129 @@
+/* ================= ROOT WRAPPER ================= */
+.order-container {
+  padding: 20px;
+  max-width: 1100px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  color: #222;
+  background: #f7f8fc;
+}
+
+/* ================= HEADER ================= */
+.order-container h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #1e2a38;
+}
+
+.order-container p {
+  text-align: center;
+  color: #666;
+}
+
+/* ================= FILTER DROPDOWN ================= */
+.order-container select {
+  display: block;
+  margin: 15px auto;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+/* ================= ORDER CARD ================= */
+.order-card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 20px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* ================= BILL TITLE ================= */
+.order-card h3 {
+  margin-bottom: 10px;
+  color: #2b2b2b;
+}
+
+/* ================= TABLE ================= */
+.order-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.order-card th {
+  background: #4a90e2;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.order-card td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+/* ================= PRODUCT IMAGE ================= */
+.order-card img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* ================= QTY BUTTON LOOK ================= */
+.order-card td button {
+  padding: 4px 8px;
+  margin: 0 5px;
+  border: none;
+  background: #4a90e2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ================= TOTAL ================= */
+.total {
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #111;
+}
+
+/* ================= PDF BUTTON ================= */
+.order-card button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.order-card button:hover {
+  background: #219150;
+}
+
+/* ================= EMPTY STATE ================= */
+.order-container h3 {
+  text-align: center;
+  color: red;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .order-card table {
+    font-size: 12px;
+  }
+
+  .order-card img {
+    width: 40px;
+    height: 40px;
+  }
+}

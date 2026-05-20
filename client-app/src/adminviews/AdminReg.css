@@ -1,0 +1,102 @@
+/* ===== ROOT ===== */
+:root {
+  --primary: #4f46e5;
+  --secondary: #06b6d4;
+  --bg: #eef2ff;
+  --text: #1f2937;
+  --error: #ef4444;
+}
+
+/* ===== CONTAINER ===== */
+.adminreg-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #eef2ff, #ecfeff);
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== FORM CARD ===== */
+.adminreg-form {
+  width: 360px;
+  padding: 30px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  animation: popUp 0.5s ease;
+}
+
+/* ===== HEADER ===== */
+.adminreg-form h4 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text);
+  font-size: 20px;
+}
+
+/* ===== INPUT ===== */
+.adminreg-form input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+/* FOCUS EFFECT */
+.adminreg-form input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  transform: scale(1.02);
+}
+
+/* ===== BUTTON ===== */
+.adminReg-button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* HOVER */
+.adminReg-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* CLICK */
+.adminReg-button:active {
+  transform: scale(0.97);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes popUp {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .adminreg-form {
+    width: 90%;
+    padding: 20px;
+  }
+}

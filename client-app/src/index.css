@@ -1,0 +1,126 @@
+/* =========================
+   🔥 GLOBAL RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================
+   🔥 ONLY BACKGROUND
+========================= */
+body {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  min-height: 100vh;
+}
+
+/* ROOT FULL SIZE */
+html, #root {
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   🔥 CONTAINER (NO COLOR FORCE)
+========================= */
+.containermain {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* =========================
+   🔥 FORM BOX (NO TEXT COLOR SET)
+========================= */
+.form-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* =========================
+   🔥 INPUT (DEFAULT COLORS)
+========================= */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+}
+
+/* =========================
+   🔥 TABLE (NO WHITE FORCE)
+========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* =========================
+   🔥 BUTTONS (ONLY STYLE, NO COLOR FORCE)
+========================= */
+button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+/* =========================
+   🔥 IMAGES
+========================= */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+img.product-image {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* =========================
+   🔥 NAVBAR CLEAN
+========================= */
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ul li {
+  flex: 1;
+}
+
+ul li a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+
+/* =========================
+   🔥 RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  table {
+    font-size: 13px;
+  }
+}

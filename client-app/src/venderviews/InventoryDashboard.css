@@ -1,0 +1,130 @@
+/* MAIN */
+/* first return*/
+.invDash-card {
+  padding: 20px;
+  background: #92b3e6;
+  
+  font-family: Arial, sans-serif;
+
+}
+
+
+
+.invDash-container {
+  padding: 20px;
+  background: #92b3e6;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.invDash-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #1a2b49;
+}
+.invDash-top{
+  
+  color: #444;
+}
+
+/* SEARCH */
+.invDash-searchBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.invDash-searchBox input {
+  width: 350px;
+  max-width: 90%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* CARD */
+.invDash-card {
+  background: white;
+  padding: 15px;
+  margin: 10px auto;
+  width: 60%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.invDash-card:hover {
+  transform: scale(1.02);
+}
+
+/* TEXT */
+.invDash-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: navy;
+}
+
+.invDash-stock {
+  color: #444;
+  margin: 5px 0;
+}
+
+/* BUTTON */
+.invDash-btn {
+  background: #ff9900;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.invDash-btn:hover {
+  background: #e68a00;
+}
+
+/* MODAL */
+.invDash-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invDash-modalBox {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  text-align: center;
+}
+
+.invDash-modalBox input,
+.invDash-modalBox select {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+.invDash-modalBox button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+}
+
+.invDash-modalBox button:hover {
+  background: #0056b3;
+}

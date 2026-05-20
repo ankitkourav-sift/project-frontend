@@ -1,0 +1,139 @@
+/* Page Background */
+
+.venderreg-container{
+    width:100%;
+    min-height:100vh;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* Form Card */
+
+.venderreg-form{
+    width:420px;
+    background:white;
+    padding:30px 35px;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+
+/* Heading */
+
+.venderreg-form h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+
+/* Form group */
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:15px;
+}
+
+
+/* Labels */
+
+.form-group label{
+    font-weight:600;
+    margin-bottom:5px;
+    color:#444;
+}
+
+
+/* Inputs */
+
+.form-group input{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:14px;
+    outline:none;
+    transition:0.3s;
+}
+
+
+.form-group input:focus{
+    border-color:#667eea;
+    box-shadow:0 0 5px rgba(102,126,234,0.4);
+}
+
+
+/* Password input with icon */
+
+.password-field .input-with-icon{
+    position:relative;
+}
+
+
+.input-with-icon input{
+    width:100%;
+}
+
+
+.eye-icon{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#666;
+}
+
+
+/* Image preview */
+
+.image-preview{
+    width:80px;
+    height:80px;
+    margin-top:10px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #ddd;
+}
+
+
+/* Error message */
+
+.error{
+    color:red;
+    font-size:12px;
+    margin-top:3px;
+}
+
+
+/* Button */
+
+.form-group button{
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#667eea;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+
+.form-group button:hover{
+    background:#4b5bdc;
+    transform:translateY(-2px);
+}
+
+
+/* Status message */
+
+.form-group{
+    font-size:14px;
+    text-align:center;
+    color:green;
+}
