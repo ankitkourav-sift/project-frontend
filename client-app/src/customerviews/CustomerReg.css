@@ -1,131 +1,212 @@
-/* 🔥 FULL PAGE */
+/* ================= MAIN CONTAINER ================= */
+
 .cr-container {
+  width: 100%;
   min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(135deg, #0f172a, #020617);
-  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    #0f172a,
+    #1e293b,
+    #334155
+  );
+
+  padding: 30px;
+  box-sizing: border-box;
 }
 
-/* 🔥 CARD */
+/* ================= FORM BOX ================= */
+
 .cr-form {
   width: 100%;
-  max-width: 420px;
-  padding: 30px;
+  max-width: 500px;
 
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
 
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(12px);
 
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
-  animation: fadeIn 0.6s ease-in-out;
+  border-radius: 20px;
+
+  padding: 35px;
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+  color: white;
 }
 
-/* 🔥 HEADER */
+/* ================= TITLE ================= */
+
 .cr-form h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #38bdf8;
-  letter-spacing: 1px;
+
+  margin-bottom: 25px;
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+  color: #ffffff;
 }
 
-/* 🔥 STATUS */
+/* ================= STATUS ================= */
+
 .cr-form p {
   text-align: center;
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin-bottom: 15px;
+  font-weight: bold;
 }
 
-/* 🔥 INPUTS */
+/* ================= FORM ================= */
+
+.cr-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* ================= INPUT ================= */
+
 .cr-form input,
 .cr-form select {
   width: 100%;
-  margin: 8px 0;
-  padding: 10px;
 
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.2);
+  padding: 14px;
 
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-
-  transition: 0.3s;
-}
-
-/* 🔥 INPUT FOCUS */
-.cr-form input:focus,
-.cr-form select:focus {
-  outline: none;
-  border-color: #38bdf8;
-  box-shadow: 0 0 10px rgba(56,189,248,0.6);
-}
-
-/* 🔥 PLACEHOLDER */
-.cr-form input::placeholder {
-  color: rgba(255,255,255,0.6);
-}
-
-/* 🔥 ERROR */
-.cr-form span {
-  font-size: 12px;
-  color: #f87171;
-}
-
-/* 🔥 IMAGE PREVIEW */
-.cr-form img {
-  margin-top: 10px;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-.cr-form img:hover {
-  transform: scale(1.05);
-}
-
-/* 🔥 BUTTON */
-.cr-form button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 12px;
-
-  border: none;
   border-radius: 10px;
 
-  background: linear-gradient(45deg, #2563eb, #38bdf8);
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 
-  font-weight: bold;
+  background: rgba(255, 255, 255, 0.15);
+
+  color: white;
+
   font-size: 15px;
 
-  cursor: pointer;
+  outline: none;
+
   transition: 0.3s;
 }
 
-/* 🔥 BUTTON HOVER */
+/* ================= SELECT OPTION FIX ================= */
+/* 🔥 THIS FIXES INVISIBLE STATE/CITY */
+
+.cr-form select option {
+  background: white;
+  color: black;
+}
+
+/* ================= PLACEHOLDER ================= */
+
+.cr-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ================= FOCUS ================= */
+
+.cr-form input:focus,
+.cr-form select:focus {
+  border-color: #38bdf8;
+
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ================= ERROR ================= */
+
+.cr-form span {
+  color: #ff6b6b;
+
+  font-size: 13px;
+
+  margin-top: -10px;
+
+  margin-bottom: 5px;
+}
+
+/* ================= FILE INPUT ================= */
+
+.cr-form input[type="file"] {
+  padding: 10px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  cursor: pointer;
+}
+
+/* ================= IMAGE PREVIEW ================= */
+
+.cr-form img {
+  width: 110px;
+  height: 110px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 3px solid white;
+
+  margin: auto;
+
+  margin-top: 10px;
+}
+
+/* ================= BUTTON ================= */
+
+.cr-form button {
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #0ea5e9,
+    #2563eb
+  );
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+/* ================= BUTTON HOVER ================= */
+
 .cr-form button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  transform: translateY(-2px);
+
+  background: linear-gradient(
+    135deg,
+    #0284c7,
+    #1d4ed8
+  );
+
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5);
 }
 
-/* 🔥 FADE ANIMATION */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ================= RESPONSIVE ================= */
 
-/* 🔥 MOBILE */
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+
   .cr-form {
-    padding: 20px;
+    padding: 25px;
   }
+
+  .cr-form h2 {
+    font-size: 26px;
+  }
+
 }

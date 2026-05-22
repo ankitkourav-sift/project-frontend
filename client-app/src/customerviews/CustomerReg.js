@@ -111,7 +111,7 @@ function CustomerReg() {
     formData.append("CContact", ccontact);
     formData.append("CEmail", cemail);
     formData.append("Cid", cid);
-    formData.append("Status", "Inactive");
+    formData.append("Status", "active");
 
     // 🔥 IMAGE
     formData.append("file", image.data);

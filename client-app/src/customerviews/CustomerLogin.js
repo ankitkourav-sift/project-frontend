@@ -53,57 +53,94 @@ function CustomerLogin() {
   };
 
   // 🔥 LOGIN (UNCHANGED)
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-    if (!validateForm()) return;
+  if (!validateForm()) return;
 
-    try {
-      const res = await axios.post(
-        "http://localhost:9292/customer/login",
-        {
-          CUserId: uid,
-          CUserPass: upass,
-        }
-      );
+  try {
 
-      if (res.data.CUserId) {
-        if (res.data.Status === "Inactive") {
-          alert("User not active. Contact admin.");
-          return;
-        }
-
-        if (isChecked) {
-          Cookies.set(
-            "auth",
-            JSON.stringify({ username: uid, password: upass }),
-            { expires: 7 }
-          );
-        }
-
-        const sessionData = {
-          cfname: res.data.CustomerName,
-          Cpicname: res.data.CPicName,
-          Cid: res.data.Cid,
-          CUserId: res.data.CUserId,
-        };
-
-        if (isChecked) {
-          localStorage.setItem("userSession", JSON.stringify(sessionData));
-        } else {
-          sessionStorage.setItem("userSession", JSON.stringify(sessionData));
-        }
-
-        navigate("/customermain/customerhome");
+    const res = await axios.post(
+      "http://localhost:9292/customer/login",
+      {
+        CUserId: uid,
+        CUserPass: upass,
       }
-    } catch (err) {
-      if (err.response && err.response.data?.message) {
-        setAuthError(err.response.data.message);
+    );
+
+    console.log(res.data);
+
+    // 🔥 CUSTOMER OBJECT
+    const customer = res.data.customer;
+
+    if (customer) {
+
+      // 🔥 STATUS CHECK
+      if (customer.Status === "Inactive") {
+        alert("User not active. Contact admin.");
+        return;
+      }
+
+      // 🔥 REMEMBER ME COOKIE
+      if (isChecked) {
+
+        Cookies.set(
+          "auth",
+          JSON.stringify({
+            username: uid,
+            password: upass,
+          }),
+          { expires: 7 }
+        );
+      }
+
+      // 🔥 SESSION DATA
+      const sessionData = {
+
+        cfname: customer.CustomerName,
+
+        // 🔥 IMAGE FIX
+        CPicName: customer.CPicName,
+
+        Cid: customer.Cid,
+
+        CUserId: customer.CUserId,
+      };
+
+      // 🔥 SAVE SESSION
+      if (isChecked) {
+
+        localStorage.setItem(
+          "userSession",
+          JSON.stringify(sessionData)
+        );
+
       } else {
-        setAuthError("Server error: " + err.message);
+
+        sessionStorage.setItem(
+          "userSession",
+          JSON.stringify(sessionData)
+        );
       }
+
+      // 🔥 REDIRECT
+      navigate("/customermain/customerhome");
     }
-  };
+
+  } catch (err) {
+
+    console.log(err);
+
+    if (err.response && err.response.data?.message) {
+
+      setAuthError(err.response.data.message);
+
+    } else {
+
+      setAuthError("Server error");
+    }
+  }
+};
 
   // ================= OTP FLOW =================
 
