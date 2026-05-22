@@ -1,116 +1,132 @@
-/* Page Background */
-body {
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
+/* ================= MAIN CONTAINER ================= */
+
+.state-page {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Heading */
-h3 {
-  color: white;
-  margin-top: 20px;
-  font-size: 28px;
-  letter-spacing: 1px;
+/* ================= TITLE ================= */
+
+.state-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #222;
 }
 
-/* Main Form Container */
-.myDiv {
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  width: 400px;
-  margin-top: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+/* ================= FORM BOX ================= */
+
+.state-form-box {
+    width: 420px;
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
 }
 
-/* Table spacing */
-.myDiv table {
-  width: 100%;
+/* ================= TABLE ================= */
+
+.state-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.myDiv td {
-  padding: 10px;
-  font-weight: 500;
+.state-table td {
+    padding: 10px;
 }
 
-/* Inputs */
-.form-control {
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  transition: 0.3s;
+/* ================= INPUT ================= */
+
+.state-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
 }
 
-.form-control:focus {
-  border-color: #2a5298;
-  outline: none;
-  box-shadow: 0 0 5px rgba(42, 82, 152, 0.5);
+.state-input:focus {
+    border-color: #007bff;
 }
 
-/* Buttons */
-button {
-  padding: 8px 15px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: bold;
+/* ================= BUTTON AREA ================= */
+
+.state-btn-table {
+    width: 100%;
+    margin-top: 15px;
 }
 
-/* Primary Button Style */
-.btn-primary {
-  background: #2a5298;
-  color: white;
+.state-btn-table td {
+    padding: 5px;
 }
 
-.btn-primary:hover {
-  background: #1e3c72;
-  transform: scale(1.05);
+/* ================= BUTTON ================= */
+
+.state-btn {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
 }
 
-/* Table Container */
-.myDiv2 {
-  margin-top: 20px;
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  width: 70%;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+.state-btn:hover {
+    background-color: #0056b3;
 }
 
-/* Data Table */
-.myDiv2 table {
-  width: 100%;
-  border-collapse: collapse;
+/* ================= LIST TABLE ================= */
+
+.state-list-box {
+    width: 700px;
+    margin: 25px auto;
+    overflow-x: auto;
 }
 
-.myDiv2 th {
-  background: #2a5298;
-  color: white;
-  padding: 10px;
+.state-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
 }
 
-.myDiv2 td {
-  padding: 10px;
-  text-align: center;
+.state-list-table th {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border: 1px solid #ddd;
 }
 
-/* Row Hover Effect */
-.myDiv2 tr:hover {
-  background-color: #f2f2f2;
-  transition: 0.3s;
+.state-list-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
 }
 
-/* Zebra Striping */
-.myDiv2 tr:nth-child(even) {
-  background-color: #f9f9f9;
+/* ================= ROW HOVER ================= */
+
+.state-list-table tbody tr:hover {
+    background-color: #f1f1f1;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .myDiv, .myDiv2 {
-    width: 90%;
-  }
+/* ================= RESPONSIVE ================= */
+
+@media screen and (max-width: 768px) {
+
+    .state-form-box {
+        width: 95%;
+    }
+
+    .state-list-box {
+        width: 95%;
+    }
+
+    .state-btn {
+        font-size: 12px;
+        padding: 7px;
+    }
 }

@@ -209,77 +209,81 @@ function StateMgt() {
                 <div className="myDiv">
 
                     <table>
+                        <tbody>
 
-                        <tr>
-                            <td>State Id</td>
-                            <td>
-                                <input
-                                    type="number"
-                                    value={stid}
-                                    onChange={handleStIdText}
-                                    className="form-control"
-                                />
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>State Id</td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        value={stid}
+                                        onChange={handleStIdText}
+                                        className="form-control"
+                                    />
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>State Name</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    value={stname}
-                                    onChange={handleStNameText}
-                                    className="form-control"
-                                />
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>State Name</td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        value={stname}
+                                        onChange={handleStNameText}
+                                        className="form-control"
+                                    />
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>Status</td>
-                            <td>
-                                <input
-                                    type="number"
-                                    value={status}
-                                    onChange={handleStatusText}
-                                    className="form-control"
-                                />
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        value={status}
+                                        onChange={handleStatusText}
+                                        className="form-control"
+                                    />
+                                </td>
+                            </tr>
 
+                        </tbody>
                     </table>
 
                     <br />
 
                     <table>
+                        <tbody>
 
-                        <tr>
+                            <tr>
 
-                            <td>
-                                <button onClick={handleAddNewButton} className="btn btn-primary">New</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleAddNewButton} className="btn btn-primary">New</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleSaveButton} className="btn btn-primary">Save</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleSaveButton} className="btn btn-primary">Save</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleShowButton} className="btn btn-primary">Show</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleShowButton} className="btn btn-primary">Show</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleSearchButton} className="btn btn-primary">Search</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleSearchButton} className="btn btn-primary">Search</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleUpdateButton} className="btn btn-primary">Update</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleUpdateButton} className="btn btn-primary">Update</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleDeleteButton} className="btn btn-primary">Delete</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleDeleteButton} className="btn btn-primary">Delete</button>
+                                </td>
 
-                        </tr>
+                            </tr>
 
+                        </tbody>
                     </table>
 
                 </div>

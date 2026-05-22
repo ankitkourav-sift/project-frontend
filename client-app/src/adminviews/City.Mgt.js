@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../index.css";
+import "./City.Mgt.css";
 
 function CityMgt() {
 
@@ -22,9 +22,9 @@ function CityMgt() {
         setCtName(evt.target.value);
     };
 
-  const handleStIdSelect = (evt)=>{
-setStId(parseInt(evt.target.value))
-}
+    const handleStIdSelect = (evt) => {
+        setStId(parseInt(evt.target.value));
+    };
 
     const handleStatusText = (evt) => {
         setStatus(evt.target.value);
@@ -234,100 +234,106 @@ setStId(parseInt(evt.target.value))
                 <div className="myDiv">
 
                     <table>
+                        <tbody>
 
-                        <tr>
-                            <td>City Id</td>
-                            <td>
-                                <input
-                                    type="number"
-                                    onChange={handleCtIdText}
-                                    value={ctid}
-                                    className="form-control"
-                                />
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>City Id</td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        onChange={handleCtIdText}
+                                        value={ctid}
+                                        className="form-control"
+                                    />
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>City Name</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    onChange={handleCtNameText}
-                                    value={ctname}
-                                    className="form-control"
-                                />
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>City Name</td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        onChange={handleCtNameText}
+                                        value={ctname}
+                                        className="form-control"
+                                    />
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>State Name</td>
-                            <td>
-                        <select
-onChange={handleStIdSelect}
-value={stid}
-className="form-control"
->
+                            <tr>
+                                <td>State Name</td>
+                                <td>
 
-<option value="">Select State</option>
+                                    <select
+                                        onChange={handleStIdSelect}
+                                        value={stid}
+                                        className="form-control"
+                                    >
 
-{
-stlist.map((item)=>(
-<option key={item.stid} value={item.stid}>
-{item.stname}
-</option>
-))
-}
+                                        <option value="">Select State</option>
 
-</select>
-                            </td>
-                        </tr>
+                                        {
+                                            stlist.map((item, index) => (
+                                                <option key={`${item.stid}-${index}`} value={item.stid}>
+                                                    {item.stname}
+                                                </option>
+                                            ))
+                                        }
 
-                        <tr>
-                            <td>Status</td>
-                            <td>
-                                <input
-                                    type="number"
-                                    onChange={handleStatusText}
-                                    value={status}
-                                    className="form-control"
-                                />
-                            </td>
-                        </tr>
+                                    </select>
 
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        onChange={handleStatusText}
+                                        value={status}
+                                        className="form-control"
+                                    />
+                                </td>
+                            </tr>
+
+                        </tbody>
                     </table>
 
                     <br />
 
                     <table>
+                        <tbody>
 
-                        <tr>
+                            <tr>
 
-                            <td>
-                                <button onClick={handleAddNewButton} className="btn btn-primary">New</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleAddNewButton} className="btn btn-primary">New</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleSaveButton} className="btn btn-primary">Save</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleSaveButton} className="btn btn-primary">Save</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleShowButton} className="btn btn-primary">Show</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleShowButton} className="btn btn-primary">Show</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleSearchButton} className="btn btn-primary">Search</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleSearchButton} className="btn btn-primary">Search</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleUpdateButton} className="btn btn-primary">Update</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleUpdateButton} className="btn btn-primary">Update</button>
+                                </td>
 
-                            <td>
-                                <button onClick={handleDeleteButton} className="btn btn-primary">Delete</button>
-                            </td>
+                                <td>
+                                    <button onClick={handleDeleteButton} className="btn btn-primary">Delete</button>
+                                </td>
 
-                        </tr>
+                            </tr>
 
+                        </tbody>
                     </table>
 
                 </div>
@@ -338,38 +344,49 @@ stlist.map((item)=>(
 
                     <table border="1">
 
-                        <tr>
-                            <th>City Id</th>
-                            <th>City Name</th>
-                            <th>State Name</th>
-                            <th>Status</th>
-                        </tr>
+                        <thead>
 
-                        {
-                            ctlist.map((item) => {
+                            <tr>
+                                <th>City Id</th>
+                                <th>City Name</th>
+                                <th>State Name</th>
+                                <th>Status</th>
+                            </tr>
 
-                                const state = stlist.find(st => st.stid === item.stid);
+                        </thead>
 
-                                return (
+                        <tbody>
 
-                                    <tr key={item.ctid} style={{ backgroundColor: "white", color: "black" }}>
+                            {
+                                ctlist.map((item, index) => {
 
-                                        <td>{item.ctid}</td>
+                                    const state = stlist.find(st => st.stid === item.stid);
 
-                                        <td>{item.ctname}</td>
+                                    return (
 
-                                        <td>{state ? state.stname : ""}</td>
+                                        <tr
+                                            key={`${item.ctid}-${index}`}
+                                            style={{ backgroundColor: "white", color: "black" }}
+                                        >
 
-                                        <td>
-                                            {item.status === 1 ? "Enabled" : "Disabled"}
-                                        </td>
+                                            <td>{item.ctid}</td>
 
-                                    </tr>
+                                            <td>{item.ctname}</td>
 
-                                );
+                                            <td>{state ? state.stname : ""}</td>
 
-                            })
-                        }
+                                            <td>
+                                                {item.status === 1 ? "Enabled" : "Disabled"}
+                                            </td>
+
+                                        </tr>
+
+                                    );
+
+                                })
+                            }
+
+                        </tbody>
 
                     </table>
 

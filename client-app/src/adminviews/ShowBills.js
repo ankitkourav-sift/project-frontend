@@ -16,10 +16,13 @@ function ShowBills() {
   const billsPerPage = 3;
 
   useEffect(() => {
-    axios.get("http://localhost:9292/customer/getcustomerlist")
-      .then((res) => setCustList(res.data));
+    axios
+      .get("http://localhost:9292/customer/getcustomerlist")
+      .then((res) => setCustList(res.data))
+      .catch((err) => alert(err));
 
-    axios.get("http://localhost:9292/product/showproduct")
+    axios
+      .get("http://localhost:9292/product/showproduct")
       .then((res) => setPList(res.data))
       .catch((err) => alert(err));
   }, []);
@@ -28,9 +31,11 @@ function ShowBills() {
     const cid = evt.target.value;
     setSelectedCustomer(cid);
 
-    axios.get(`http://localhost:9292/bill/billshowbillids/${cid}`)
+    axios
+      .get(`http://localhost:9292/bill/billshowbillids/${cid}`)
       .then((res) => {
         const bills = res.data;
+
         const mergedBills = [];
         let totalSum = 0;
 
@@ -38,13 +43,13 @@ function ShowBills() {
           const productData = plist.find((p) => p.pid === bitem.pid);
 
           if (productData) {
+            const qty = bitem.Qty || bitem.qty || 1;
+
             const product = {
               pname: productData.pname,
               price: parseFloat(productData.oprice),
-              qty: bitem.Qty || bitem.qty || 1,
-              subtotal: parseFloat(productData.oprice) * (bitem.Qty || bitem.qty || 1),
-
-              // 🔥 FIX: Cloudinary image
+              qty: qty,
+              subtotal: parseFloat(productData.oprice) * qty,
               pic: productData.ppicname,
             };
 
@@ -60,11 +65,13 @@ function ShowBills() {
                 products: [],
                 total: 0,
               };
+
               mergedBills.push(existingBill);
             }
 
             existingBill.products.push(product);
             existingBill.total += product.subtotal;
+
             totalSum += product.subtotal;
           }
         });
@@ -79,17 +86,28 @@ function ShowBills() {
   // Pagination
   const indexofLast = currentPage * billsPerPage;
   const indexofFirst = indexofLast - billsPerPage;
-  const currentBills = billdetailslist.slice(indexofFirst, indexofLast);
-  const totalPages = Math.ceil(billdetailslist.length / billsPerPage);
 
-  // PDF image helper
+  const currentBills = billdetailslist.slice(
+    indexofFirst,
+    indexofLast
+  );
+
+  const totalPages = Math.ceil(
+    billdetailslist.length / billsPerPage
+  );
+
+  // Image Convert
   const getBase64Image = async (url) => {
     try {
       const response = await fetch(url);
+
       const blob = await response.blob();
+
       return new Promise((resolve) => {
         const reader = new FileReader();
+
         reader.onloadend = () => resolve(reader.result);
+
         reader.readAsDataURL(blob);
       });
     } catch (err) {
@@ -97,9 +115,10 @@ function ShowBills() {
     }
   };
 
-  // PDF
+  // Download PDF
   const downloadPDF = async () => {
     setLoadingPDF(true);
+
     const doc = new jsPDF();
 
     try {
@@ -108,7 +127,12 @@ function ShowBills() {
       let yPos = 25;
 
       for (const bill of billdetailslist) {
-        doc.text(`Bill ID: ${bill.billid} | Date: ${bill.billdate}`, 14, yPos);
+        doc.text(
+          `Bill ID: ${bill.billid} | Date: ${bill.billdate}`,
+          14,
+          yPos
+        );
+
         yPos += 8;
 
         const rows = [];
@@ -118,9 +142,12 @@ function ShowBills() {
           const prod = bill.products[i];
 
           const imgUrl = prod.pic;
+
           const base64Img = await getBase64Image(imgUrl);
 
-          if (base64Img) imageMap[i] = base64Img;
+          if (base64Img) {
+            imageMap[i] = base64Img;
+          }
 
           rows.push([
             "",
@@ -157,13 +184,22 @@ function ShowBills() {
 
         yPos = doc.lastAutoTable.finalY + 10;
 
-        doc.text(`Total: ₹${bill.total.toFixed(2)}`, 14, yPos);
+        doc.text(
+          `Total: ₹${bill.total.toFixed(2)}`,
+          14,
+          yPos
+        );
+
         yPos += 10;
       }
 
-      doc.text(`Grand Total: ₹${grandTotal.toFixed(2)}`, 14, yPos + 10);
-      doc.save("CustomerBills.pdf");
+      doc.text(
+        `Grand Total: ₹${grandTotal.toFixed(2)}`,
+        14,
+        yPos + 10
+      );
 
+      doc.save("CustomerBills.pdf");
     } catch (err) {
       alert("PDF Error");
     } finally {
@@ -172,22 +208,37 @@ function ShowBills() {
   };
 
   return (
-    <div>
+    <div className="showBillsContainer">
       <center>
         <h2>Bill List (Admin View)</h2>
 
-        <select onChange={handleCustomerSelect}>
+        <select
+          onChange={handleCustomerSelect}
+          value={selectedCustomer}
+          className="customerSelect"
+        >
           <option value="">--Select Customer--</option>
-          {custlist.map((item) => (
-            <option key={item.Cid} value={item.Cid}>
+
+          {custlist.map((item, index) => (
+            <option
+              key={`${item.Cid}-${index}`}
+              value={item.Cid}
+            >
               {item.CustomerName} ({item.Cid})
             </option>
           ))}
         </select>
 
+        <br />
+        <br />
+
         {billdetailslist.length > 0 ? (
           <>
-            <table border={1} cellPadding={6}>
+            <table
+              border="1"
+              cellPadding="6"
+              className="billTable"
+            >
               <thead>
                 <tr>
                   <th>Bill</th>
@@ -202,63 +253,111 @@ function ShowBills() {
               </thead>
 
               <tbody>
-                {currentBills.map((bill) => (
-                  <React.Fragment key={`${bill.billid}-${bill.cid}`}>
-
+                {currentBills.map((bill, billIndex) => (
+                  <React.Fragment
+                    key={`${bill.billid}-${bill.cid}-${billIndex}`}
+                  >
                     {bill.products.map((prod, idx) => (
-                      <tr key={`${bill.billid}-${idx}`}>
+                      <tr
+                        key={`${bill.billid}-${prod.pname}-${idx}`}
+                      >
+                        <td>
+                          {idx === 0 ? bill.billid : ""}
+                        </td>
 
-                        <td>{idx === 0 ? bill.billid : ""}</td>
-                        <td>{idx === 0 ? bill.cid : ""}</td>
-                        <td>{idx === 0 ? bill.billdate : ""}</td>
+                        <td>
+                          {idx === 0 ? bill.cid : ""}
+                        </td>
+
+                        <td>
+                          {idx === 0 ? bill.billdate : ""}
+                        </td>
 
                         <td>{prod.pname}</td>
-                        <td>{prod.qty}</td>
-                        <td>₹{prod.price.toFixed(2)}</td>
-                        <td>₹{prod.subtotal.toFixed(2)}</td>
 
-                        {/* 🔥 FINAL IMAGE FIX */}
+                        <td>{prod.qty}</td>
+
+                        <td>
+                          ₹{prod.price.toFixed(2)}
+                        </td>
+
+                        <td>
+                          ₹{prod.subtotal.toFixed(2)}
+                        </td>
+
                         <td>
                           <img
                             src={prod.pic}
                             alt={prod.pname}
-                            style={{
-                              width: "70px",
-                              height: "70px",
-                              objectFit: "cover",
-                              borderRadius: "8px",
+                            className="billImage"
+                            onError={(e) => {
+                              e.target.src =
+                                "https://via.placeholder.com/80";
                             }}
-                            onError={(e) =>
-                              (e.target.src =
-                                "https://via.placeholder.com/80")
-                            }
                           />
                         </td>
-
                       </tr>
                     ))}
 
-                    <tr>
+                    <tr
+                      key={`total-${bill.billid}-${billIndex}`}
+                    >
                       <td colSpan="6"></td>
+
                       <td>
-                        <b>Total: ₹{bill.total.toFixed(2)}</b>
+                        <b>
+                          Total: ₹
+                          {bill.total.toFixed(2)}
+                        </b>
                       </td>
+
                       <td></td>
                     </tr>
-
                   </React.Fragment>
                 ))}
               </tbody>
             </table>
 
-            <button onClick={downloadPDF}>
-              {loadingPDF ? "Generating..." : "Download PDF"}
+            <br />
+
+            <div className="paginationDiv">
+              <button
+                disabled={currentPage === 1}
+                onClick={() =>
+                  setCurrentPage(currentPage - 1)
+                }
+              >
+                Prev
+              </button>
+
+              <span>
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() =>
+                  setCurrentPage(currentPage + 1)
+                }
+              >
+                Next
+              </button>
+            </div>
+
+            <br />
+
+            <button
+              onClick={downloadPDF}
+              className="downloadBtn"
+            >
+              {loadingPDF
+                ? "Generating..."
+                : "Download PDF"}
             </button>
           </>
         ) : (
           <p>No bills found</p>
         )}
-
       </center>
     </div>
   );
