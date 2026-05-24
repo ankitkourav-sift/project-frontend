@@ -20,7 +20,7 @@ import VenderLogin from "./venderviews/VenderLogin";
 import VenderReg from "./venderviews/VenderReg";
 import VenderHome from "./venderviews/VenderHome";
 import Navbar from "./Navbar";
-
+console.log(process.env.REACT_APP_BASE_API_URL);
 function App() {
   return (
     <BrowserRouter>
