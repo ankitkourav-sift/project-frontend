@@ -17,7 +17,7 @@ function ViewOrders({ CUserId }) {
   const [billFilter, setBillFilter] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const BASE_URL = "http://localhost:9292";
+  const BASE_URL = "https://project-backend-nka5.vercel.app";
 
   // ================= LOAD ORDERS =================
   useEffect(() => {

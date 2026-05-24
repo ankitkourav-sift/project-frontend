@@ -22,7 +22,7 @@ function OrderTrackingPerBillId({ BillId }) {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:9292/bill/showbillbyid/${billid}`
+        `https://project-backend-nka5.vercel.app/bill/showbillbyid/${billid}`
       );
 
       // backend returns array

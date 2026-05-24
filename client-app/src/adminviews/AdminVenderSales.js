@@ -35,7 +35,7 @@ export default function AdminVenderSales() {
   // ================= FETCH VENDERS =================
   useEffect(() => {
     axios
-      .get("http://localhost:9292/vender/getvendercount")
+      .get("https://project-backend-nka5.vercel.app/vender/getvendercount")
       .then((res) => setVenderList(res.data || []))
       .catch(() => setVenderList([]));
   }, []);
@@ -48,7 +48,7 @@ export default function AdminVenderSales() {
 
     try {
       const res = await axios.get(
-        `http://localhost:9292/sales/vender/${vid}`
+        `https://project-backend-nka5.vercel.app/sales/vender/${vid}`
       );
 
       // ✅ FIX: backend array direct + object fallback

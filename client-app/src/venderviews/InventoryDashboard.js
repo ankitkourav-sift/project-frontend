@@ -15,7 +15,7 @@ function InventoryDashboard({ vid }) {
     if (!vid) return;
 
     try {
-      const res = await fetch(`http://localhost:9292/inventory/inventorybyvendor/${vid}`);
+      const res = await fetch(`https://project-backend-nka5.vercel.app/inventory/inventorybyvendor/${vid}`);
       const data = await res.json();
       setItems(Array.isArray(data) ? data : []);
     } catch {
@@ -30,7 +30,7 @@ function InventoryDashboard({ vid }) {
   // 🔥 FETCH PRODUCTS
   useEffect(() => {
     async function fetchProducts() {
-      const res = await fetch("http://localhost:9292/product/showproduct");
+      const res = await fetch("https://project-backend-nka5.vercel.app/product/showproduct");
       const products = await res.json();
 
       const map = {};
@@ -60,7 +60,7 @@ function InventoryDashboard({ vid }) {
           : { delta: Number(editDelta) };
 
       const res = await fetch(
-        `http://localhost:9292/inventory/stock/${editing.pid}/vendor/${editing.vid}?mode=${editMode}`,
+        `https://project-backend-nka5.vercel.app/inventory/stock/${editing.pid}/vendor/${editing.vid}?mode=${editMode}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

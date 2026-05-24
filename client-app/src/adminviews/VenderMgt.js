@@ -19,7 +19,7 @@ function VenderMgt(){
     },[]);
 
     const fetchVenders=()=>{
-        axios.get(`http://localhost:9292/vender/getvendercount`)
+        axios.get(`https://project-backend-nka5.vercel.app/vender/getvendercount`)
         .then((res)=> setVenderList(res.data))
         .catch(err=> alert(err));
     };
@@ -74,7 +74,7 @@ function VenderMgt(){
         if(editForm.VPicName) formData.append("file", editForm.VPicName);
 
         axios.put(
-            `http://localhost:9292/vender/update/${selectedVender.VUserId}`,
+            `https://project-backend-nka5.vercel.app/vender/update/${selectedVender.VUserId}`,
             formData
         )
         .then(res=>{
@@ -87,7 +87,7 @@ function VenderMgt(){
 
     const toggleStatus = (vid,status)=>{
         axios.put(
-            `http://localhost:9292/vender/vendermanage/${vid}/${status==="Active"?"Inactive":"Active"}`
+            `https://project-backend-nka5.vercel.app/vender/vendermanage/${vid}/${status==="Active"?"Inactive":"Active"}`
         )
         .then(()=>{
             fetchVenders();

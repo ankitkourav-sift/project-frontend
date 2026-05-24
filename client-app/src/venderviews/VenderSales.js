@@ -28,7 +28,7 @@ function VenderSales({vender})
  useEffect(() => {
      if(!vender?.Vid) return;
 
-     axios.get(`http://localhost:9292/sales/vender/${vender.Vid}`)
+     axios.get(`https://project-backend-nka5.vercel.app/sales/vender/${vender.Vid}`)
      .then(res => setSales(res.data || []))
      .catch(err => console.log(err));
 

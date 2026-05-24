@@ -13,27 +13,27 @@ function ProductList(props)
     const [vlist,setVList] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:9292/product/showproduct")
+        axios.get("https://project-backend-nka5.vercel.app/product/showproduct")
         .then((res) => setPList(res.data))
         .catch((err) => alert(err));
 
-        axios.get("http://localhost:9292/productcatg/showproductcatg")
+        axios.get("https://project-backend-nka5.vercel.app/productcatg/showproductcatg")
         .then((res) => setPCatgList(res.data))
         .catch((err) => alert(err));
 
-        axios.get("http://localhost:9292/vender/getvendercount")
+        axios.get("https://project-backend-nka5.vercel.app/vender/getvendercount")
         .then((res) => setVList(res.data))
         .catch((err)=> alert(err));
     },[]);
 
     const handleActiveButton=(pid) => {
-        axios.put("http://localhost:9292/product/updateproductstatus/"+pid+"/Active")
+        axios.put("https://project-backend-nka5.vercel.app/product/updateproductstatus/"+pid+"/Active")
         .then(() => alert("Product Status Updated"))
         .catch((err) => alert(err));
     }
 
     const handleInactiveButton=(pid) =>{
-        axios.put("http://localhost:9292/product/updateproductstatus/"+pid+"/Inactive")
+        axios.put("https://project-backend-nka5.vercel.app/product/updateproductstatus/"+pid+"/Inactive")
         .then(() => alert("Product Status Updated"))
         .catch((err) => alert(err)); 
     }
@@ -60,13 +60,13 @@ function ProductList(props)
     const handleSearch=(evt)=>{
         if(evt.target.value>0)
         {
-            axios.get("http://localhost:9292/product/showproductbycatgid/"+evt.target.value)
+            axios.get("https://project-backend-nka5.vercel.app/product/showproductbycatgid/"+evt.target.value)
             .then((res)=> setPList(res.data))
             .catch((err)=> alert(err));
         }
         else
         {
-            axios.get("http://localhost:9292/product/showproduct")
+            axios.get("https://project-backend-nka5.vercel.app/product/showproduct")
             .then((res)=> setPList(res.data))
             .catch((err)=> alert(err));
         }
@@ -75,13 +75,13 @@ function ProductList(props)
     const handleSearchByVender=(evt) => {
         if(evt.target.value>0)
         {
-            axios.get("http://localhost:9292/product/showproductbyvender/"+evt.target.value)
+            axios.get("https://project-backend-nka5.vercel.app/product/showproductbyvender/"+evt.target.value)
             .then((res) => setPList(res.data))
             .catch((err)=> alert(err));
         }
         else
         {
-            axios.get("http://localhost:9292/product/showproduct")
+            axios.get("https://project-backend-nka5.vercel.app/product/showproduct")
             .then((res) => setPList(res.data))
             .catch((err)=> alert(err));
         }
@@ -90,13 +90,13 @@ function ProductList(props)
     const handleSearchByStatus=(evt) => {
         if(evt.target.value!=="0")
         { 
-            axios.get("http://localhost:9292/product/showproductstatus/"+evt.target.value)
+            axios.get("https://project-backend-nka5.vercel.app/product/showproductstatus/"+evt.target.value)
             .then((res) => setPList(res.data))
             .catch((err)=> alert(err));
         }
         else
         {
-            axios.get("http://localhost:9292/product/showproduct")
+            axios.get("https://project-backend-nka5.vercel.app/product/showproduct")
             .then((res) => setPList(res.data))
             .catch((err)=> alert(err));
         }

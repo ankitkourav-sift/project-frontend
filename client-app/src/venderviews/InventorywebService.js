@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./InventoryWb.css";
 
-const BASE_URL = "http://localhost:9292";
+const BASE_URL = "https://project-backend-nka5.vercel.app";
 
 const ProductAPI = {
 

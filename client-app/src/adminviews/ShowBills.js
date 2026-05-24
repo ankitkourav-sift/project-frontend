@@ -17,12 +17,12 @@ function ShowBills() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9292/customer/getcustomerlist")
+      .get("https://project-backend-nka5.vercel.app/customer/getcustomerlist")
       .then((res) => setCustList(res.data))
       .catch((err) => alert(err));
 
     axios
-      .get("http://localhost:9292/product/showproduct")
+      .get("https://project-backend-nka5.vercel.app/product/showproduct")
       .then((res) => setPList(res.data))
       .catch((err) => alert(err));
   }, []);
@@ -32,7 +32,7 @@ function ShowBills() {
     setSelectedCustomer(cid);
 
     axios
-      .get(`http://localhost:9292/bill/billshowbillids/${cid}`)
+      .get(`https://project-backend-nka5.vercel.app/bill/billshowbillids/${cid}`)
       .then((res) => {
         const bills = res.data;
 

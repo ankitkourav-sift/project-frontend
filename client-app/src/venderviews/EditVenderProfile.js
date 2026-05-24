@@ -17,7 +17,7 @@
 
          const fetchVendorList = async () =>{
             try{
-                const res = await axios.get("http://localhost:9292/vender/getvendercount");
+                const res = await axios.get("https://project-backend-nka5.vercel.app/vender/getvendercount");
                 setVendorList(res.data);
             } catch(err)
             {
@@ -64,7 +64,7 @@
                 {
                     form.append("file",newImage)
                 }
-                const res = await axios.put(`http://localhost:9292/vender/update/${formData.VUserId}`,form,
+                const res = await axios.put(`https://project-backend-nka5.vercel.app/vender/update/${formData.VUserId}`,form,
                     // {
                     //     headers:{"Content-Type": "multipart/form-data"}
                     // }

@@ -4,7 +4,7 @@ import "./CustomerHero.css";
 
 function CustomerHero({ Customer, setActiveTab }) {
   const BASE_URL =
-    process.env.REACT_APP_BASE_API_URL || "http://localhost:9292";
+    process.env.REACT_APP_BASE_API_URL || "https://project-backend-nka5.vercel.app";
 
   const [images, setImages] = useState([]);
   const [index, setIndex] = useState(0);

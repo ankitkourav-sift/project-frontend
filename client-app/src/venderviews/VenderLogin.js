@@ -12,6 +12,7 @@ function VenderLogin(){
     const [showForget,setShowForget]=useState(false);
 
     const REACT_APP_BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
+    console.log(REACT_APP_BASE_API_URL);
 
     // Load Session
     useEffect(() => {

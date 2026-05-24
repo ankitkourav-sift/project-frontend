@@ -12,7 +12,7 @@ function AddSaleForm({ venderId }) {
 
   // ================= LOAD PRODUCTS =================
   useEffect(() => {
-    axios.get("http://localhost:9292/product/showproduct")
+    axios.get("https://project-backend-nka5.vercel.app/product/showproduct")
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
   }, []);
@@ -32,7 +32,7 @@ function AddSaleForm({ venderId }) {
   useEffect(() => {
     if (!productId || !venderId) return;
 
-    axios.get(`http://localhost:9292/inventory/getstock/${productId}/${venderId}`)
+    axios.get(`https://project-backend-nka5.vercel.app/inventory/getstock/${productId}/${venderId}`)
       .then(res => {
         setStock(res.data.stock);
       })
@@ -62,7 +62,7 @@ function AddSaleForm({ venderId }) {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:9292/sales/add", {
+      await axios.post("https://project-backend-nka5.vercel.app/sales/add", {
         billid: Date.now(),
         productId: Number(productId),
         quantity: Number(quantity),

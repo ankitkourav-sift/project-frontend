@@ -65,7 +65,7 @@ export default function Vender_Change_pass()
         setLoading(true);
 
       try{
-  const res = await axios.post("http://localhost:9292/vender/changepassword", {
+  const res = await axios.post("https://project-backend-nka5.vercel.app/vender/changepassword", {
     VUserId,
     OldPassword: oldPassword,
     newPassword: newPassword,

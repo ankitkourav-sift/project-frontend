@@ -22,7 +22,7 @@ function OrderTracking({ CUserId }) {
     if (!CUserId) return;
 
     axios
-      .get(`http://localhost:9292/bill/billshowbillids/${CUserId}`)
+      .get(`https://project-backend-nka5.vercel.app/bill/billshowbillids/${CUserId}`)
       .then((res) => setBillIds(res.data))
       .catch(console.log);
   }, [CUserId]);
@@ -31,7 +31,7 @@ function OrderTracking({ CUserId }) {
   const loadOrder = async (id) => {
     try {
       const res = await axios.get(
-        `http://localhost:9292/bill/showbillbyid/${id}`
+        `https://project-backend-nka5.vercel.app/bill/showbillbyid/${id}`
       );
       setOrder(res.data?.[0] || null);
     } catch (err) {

@@ -40,7 +40,7 @@ function Bill ({data,onBack, onPaymentSuccess,onUpdateCart,onRemoveItem})
     setQuantites(qtyObj);
 
     if(data.cid){
-      axios.get(`http://localhost:9292/customer/getcustomerdetails/${data.cid}`)
+      axios.get(`https://project-backend-nka5.vercel.app/customer/getcustomerdetails/${data.cid}`)
       .then((res) => {
         const body = res.data || {};
         setCustomer({
@@ -98,7 +98,7 @@ function Bill ({data,onBack, onPaymentSuccess,onUpdateCart,onRemoveItem})
       try {
         const qty = quantities[item.pid] || 1;
 
-        await axios.post ("http://localhost:9292/bill/billsave", {
+        await axios.post ("https://project-backend-nka5.vercel.app/bill/billsave", {
           billid : nextId,
           billdate: today,
           cid: data.cid,
@@ -106,7 +106,7 @@ function Bill ({data,onBack, onPaymentSuccess,onUpdateCart,onRemoveItem})
           qty,
         });
 
-        await axios.post("http://localhost:9292/sales/add",{
+        await axios.post("https://project-backend-nka5.vercel.app/sales/add",{
           venderId : item.vid ?? null,
           productId : item.pid,
           quantity : qty,
@@ -167,7 +167,7 @@ function Bill ({data,onBack, onPaymentSuccess,onUpdateCart,onRemoveItem})
     const amountInPaisa = Math.round(totalAmount * 100);
 
     const orderRes = await axios.post(
-      "http://localhost:9292/payment/orders",
+      "https://project-backend-nka5.vercel.app/payment/orders",
       { amount: amountInPaisa }
     );
 
@@ -187,7 +187,7 @@ function Bill ({data,onBack, onPaymentSuccess,onUpdateCart,onRemoveItem})
 
           // 🔥 FIXED ROUTE HERE (IMPORTANT)
           await axios.post(
-            "http://localhost:9292/order/payment-success",
+            "https://project-backend-nka5.vercel.app/order/payment-success",
             {
               razorpayPaymentId: response.razorpay_payment_id,
               razorpayOrderId: response.razorpay_order_id,

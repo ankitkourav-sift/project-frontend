@@ -127,7 +127,7 @@ function CustomerHome() {
   src={
     user?.CPicName?.startsWith("http")
       ? user.CPicName
-      : `http://localhost:9292/customer_images/${user?.CPicName}`
+      : `https://project-backend-nka5.vercel.app/customer_images/${user?.CPicName}`
   }
   alt="profile"
 />

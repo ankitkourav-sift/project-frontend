@@ -61,7 +61,7 @@ const handleLogin = async (e) => {
   try {
 
     const res = await axios.post(
-      "http://localhost:9292/customer/login",
+      "https://project-backend-nka5.vercel.app/customer/login",
       {
         CUserId: uid,
         CUserPass: upass,
@@ -157,7 +157,7 @@ const handleLogin = async (e) => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:9292/customer/forgotpassword/send-otp",
+        "https://project-backend-nka5.vercel.app/customer/forgotpassword/send-otp",
         { CUserId: forgotEmail }
       );
 
@@ -186,7 +186,7 @@ const handleLogin = async (e) => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:9292/customer/forgotpassword/verify-otp",
+        "https://project-backend-nka5.vercel.app/customer/forgotpassword/verify-otp",
         {
           CUserId: forgotEmail,
           OTP: otp,
@@ -218,7 +218,7 @@ const handleLogin = async (e) => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:9292/customer/forgotpassword/change-password",
+        "https://project-backend-nka5.vercel.app/customer/forgotpassword/change-password",
         {
           CUserId: forgotEmail,
           NewPassword: newPassword,

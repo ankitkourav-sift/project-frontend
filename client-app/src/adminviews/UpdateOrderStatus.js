@@ -23,7 +23,7 @@ function UpdateOrderStatus({ updateByName }) {
   // ================= LOAD BILL IDS =================
   useEffect(() => {
     axios
-      .get("http://localhost:9292/bill/allbillids")
+      .get("https://project-backend-nka5.vercel.app/bill/allbillids")
       .then((res) => {
         console.log("Bill IDs:", res.data);
         setBillIds(res.data);
@@ -39,7 +39,7 @@ function UpdateOrderStatus({ updateByName }) {
     if (!billid) return;
 
     axios
-      .get(`http://localhost:9292/bill/getstatus/${billid}`)
+      .get(`https://project-backend-nka5.vercel.app/bill/getstatus/${billid}`)
       .then((res) => {
         setCurrentStatus(res.data.status);
         setUpdatedAt(res.data.updatedAt);
@@ -69,7 +69,7 @@ function UpdateOrderStatus({ updateByName }) {
     if (!window.confirm(`Confirm update status to "${status}" ?`)) return;
 
     try {
-      await axios.put("http://localhost:9292/bill/updatestatus", {
+      await axios.put("https://project-backend-nka5.vercel.app/bill/updatestatus", {
         billid,
         status,
         updatedBy: updateByName,

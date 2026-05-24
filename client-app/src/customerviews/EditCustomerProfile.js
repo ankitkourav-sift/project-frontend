@@ -41,7 +41,7 @@ function EditCustomerProfile({
 
     axios
       .get(
-        `http://localhost:9292/customer/getcustomerdetails/${cid}`
+        `https://project-backend-nka5.vercel.app/customer/getcustomerdetails/${cid}`
       )
       .then((res) => {
 
@@ -64,7 +64,7 @@ function EditCustomerProfile({
   useEffect(() => {
 
     axios
-      .get("http://localhost:9292/state/show")
+      .get("https://project-backend-nka5.vercel.app/state/show")
       .then((res) => {
         setStList(res.data);
       })
@@ -82,7 +82,7 @@ function EditCustomerProfile({
 
     axios
       .get(
-        `http://localhost:9292/city/showcitybystate/${formData.StId}`
+        `https://project-backend-nka5.vercel.app/city/showcitybystate/${formData.StId}`
       )
       .then((res) => {
         setCtList(res.data);
@@ -123,7 +123,7 @@ function EditCustomerProfile({
 
     axios
       .get(
-        `http://localhost:9292/city/showcitybystate/${stid}`
+        `https://project-backend-nka5.vercel.app/city/showcitybystate/${stid}`
       )
       .then((res) => {
         setCtList(res.data);
@@ -242,7 +242,7 @@ function EditCustomerProfile({
       }
 
       const res = await axios.put(
-        `http://localhost:9292/customer/update/${cid}`,
+        `https://project-backend-nka5.vercel.app/customer/update/${cid}`,
         form,
         {
           headers: {

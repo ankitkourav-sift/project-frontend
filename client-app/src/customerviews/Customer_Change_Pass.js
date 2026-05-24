@@ -79,7 +79,7 @@
 
              try
              {
-                const res = await axios.post("http://localhost:9292/customer/changepassword", {
+                const res = await axios.post("https://project-backend-nka5.vercel.app/customer/changepassword", {
                       CUserId,
                       OldPassword:oldPassword,
                       NewPassword:newPassword,

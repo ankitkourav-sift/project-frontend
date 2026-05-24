@@ -17,7 +17,7 @@ function Product({ data }) {
   const [pcatglist, setPCatgList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
-  const API = "http://localhost:9292";
+  const API = "https://project-backend-nka5.vercel.app";
 
   // ================= FETCH CATEGORY =================
   useEffect(() => {

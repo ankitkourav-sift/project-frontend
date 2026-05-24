@@ -91,7 +91,7 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
       if (session) {
         const obj = JSON.parse(session);
         setCustomerSession(obj);
-        setCId(obj.cid);
+        setCId(obj.Cid || obj.cid || obj.CUserId);
       }
     }
   }, [mode, API]);

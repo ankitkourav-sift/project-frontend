@@ -22,12 +22,12 @@ function CustomerReg() {
   // ================= INIT =================
   useEffect(() => {
     axios
-      .get("http://localhost:9292/customer/getcustomercount")
+      .get("https://project-backend-nka5.vercel.app/customer/getcustomercount")
       .then((res) => setCId(res.data.count + 1))
       .catch(() => setCId(1));
 
     axios
-      .get("http://localhost:9292/state/show")
+      .get("https://project-backend-nka5.vercel.app/state/show")
       .then((res) => setSList(res.data))
       .catch(() => alert("State load error"));
   }, []);
@@ -38,7 +38,7 @@ function CustomerReg() {
 
     axios
       .get(
-        "http://localhost:9292/city/showcitybystate/" +
+        "https://project-backend-nka5.vercel.app/city/showcitybystate/" +
           evt.target.value
       )
       .then((res) => setCtList(res.data))
@@ -118,7 +118,7 @@ function CustomerReg() {
 
     try {
       const res = await axios.post(
-        "http://localhost:9292/customer/register",
+        "https://project-backend-nka5.vercel.app/customer/register",
         formData,
         {
           headers: {
