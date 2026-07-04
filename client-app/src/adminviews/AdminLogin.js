@@ -7,11 +7,12 @@ function AdminLogin() {
   const [upass, setUpass] = useState("");
   const navigate = useNavigate();
 
-  const handleLoginButton = () => {
-    const savedId = localStorage.getItem("adminId");
-    const savedPass = localStorage.getItem("adminPass");
+  // Permanent Admin Credentials
+  const ADMIN_USERNAME = "ankit";
+  const ADMIN_PASSWORD = "Ankit@1506";
 
-    if (uid === savedId && upass === savedPass) {
+  const handleLoginButton = () => {
+    if (uid === ADMIN_USERNAME && upass === ADMIN_PASSWORD) {
       localStorage.setItem("adminAuth", "true");
       localStorage.setItem("admintoken", "12345");
       navigate("/adminmain/adminhome");
