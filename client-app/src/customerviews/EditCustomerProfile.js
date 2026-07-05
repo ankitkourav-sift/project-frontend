@@ -210,11 +210,7 @@ const handleSubmit = async () => {
     if (newImage) {
       form.append("file", newImage);
     }
-console.log("===== FORM DATA =====");
-console.log("Cid:", formData.Cid);
-console.log("CUserId:", formData.CUserId);
-console.log("_id:", formData._id);
-console.log(formData);
+
     const res = await axios.put(
       `https://project-backend-nka5.vercel.app/customer/update/${cid}`,
       form,
@@ -233,9 +229,7 @@ console.log(formData);
 console.log("UPDATED USER FULL:");
 console.log(updatedUser);
 
-console.log("Mongo _id:", updatedUser._id);
-console.log("Cid:", updatedUser.Cid);
-console.log("CUserId:", updatedUser.CUserId);
+
 
     // ✅ FIX 1: ONLY ONE STORAGE (REMOVE sessionStorage)
     localStorage.setItem(

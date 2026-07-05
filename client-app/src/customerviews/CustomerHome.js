@@ -52,8 +52,7 @@ function CustomerHome() {
 
   return String(user.Cid);
 }, [user]);
-console.log("USER:", user);
-console.log("customerId:", customerId);
+
 
 
   // ================= LOGOUT =================
