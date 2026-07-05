@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./OrderTrackingModern.css";
+import { useParams } from "react-router-dom";
+import "./OrderTrackingPerBillId.css";
 
 const STATUS_FLOW = [
   "Processing",
@@ -12,40 +13,56 @@ const STATUS_FLOW = [
   "Cancelled",
 ];
 
-function OrderTrackingPerBillId({ BillId }) {
+function OrderTrackingPerBillId() {
+  const { billid } = useParams();
+
+  const safeBillId = billid?.trim(); // 🔥 IMPORTANT FIX
+
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const loadOrder = async (billid) => {
-    if (!billid) return;
+  // 🔥 DEBUG: BILL ID CHECK
+  useEffect(() => {
+    console.log("👉 BILLID FROM URL:", safeBillId);
+  }, [safeBillId]);
+
+  // ================= FETCH ORDER =================
+  const fetchOrder = async () => {
+    if (!safeBillId) {
+      console.log("❌ billid missing");
+      return;
+    }
 
     setLoading(true);
+
     try {
       const res = await axios.get(
-        `https://project-backend-nka5.vercel.app/bill/showbillbyid/${billid}`
+        `https://project-backend-nka5.vercel.app/bill/showbillbyid/${safeBillId}`
       );
 
-      // backend returns array
+      console.log("✅ API RESPONSE:", res.data);
+
       setOrder(res.data?.[0] || null);
     } catch (err) {
-      console.error(err);
+      console.log("❌ API ERROR:", err);
       setOrder(null);
     } finally {
       setLoading(false);
     }
   };
 
+  // ================= EFFECT =================
   useEffect(() => {
-    if (!BillId) return;
+    if (!safeBillId || safeBillId === "undefined") return;
 
-    loadOrder(BillId);
+    fetchOrder();
 
     const interval = setInterval(() => {
-      loadOrder(BillId);
-    }, 4000);
+      fetchOrder();
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [BillId]);
+  }, [safeBillId]);
 
   const currentIndex = order
     ? Math.max(STATUS_FLOW.indexOf(order.status), 0)
@@ -54,25 +71,31 @@ function OrderTrackingPerBillId({ BillId }) {
   return (
     <div className="track-container">
 
-      <h2 className="track-title">📦 Order Tracking</h2>
+      <h2>📦 Order Tracking</h2>
 
-      {loading && <p className="loading">Loading...</p>}
+      {/* LOADING */}
+      {loading && <p>Loading...</p>}
 
-      {!order && !loading && (
-        <p className="empty">Select an order to track</p>
+      {/* DEBUG / ERROR STATE */}
+      {!safeBillId && (
+        <p style={{ color: "red" }}>
+          ❌ Bill ID NOT FOUND (CHECK ROUTE)
+        </p>
       )}
 
+      {/* EMPTY STATE */}
+      {safeBillId && !order && !loading && (
+        <p>No Order Found</p>
+      )}
+
+      {/* ORDER CARD */}
       {order && (
         <div className="card">
 
-          <div className="card-header">
-            <h3>Bill #{order.billid}</h3>
-            <span className="badge">{order.status}</span>
-          </div>
+          <h3>Bill #{order.billid}</h3>
+          <p>Status: {order.status}</p>
 
-          <p><b>Date:</b> {order.billdate}</p>
-
-          {/* PROGRESS */}
+          {/* PROGRESS BAR */}
           <div className="progress">
             <div
               className="progress-bar"
@@ -89,13 +112,13 @@ function OrderTrackingPerBillId({ BillId }) {
             {STATUS_FLOW.map((s, i) => (
               <div
                 key={i}
-                className={`step ${i <= currentIndex ? "active" : ""}`}
+                className={i <= currentIndex ? "active" : ""}
               >
-                <div className="circle">{i + 1}</div>
-                <span>{s}</span>
+                {s}
               </div>
             ))}
           </div>
+
         </div>
       )}
     </div>

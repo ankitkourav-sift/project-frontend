@@ -20,6 +20,8 @@ import VenderLogin from "./venderviews/VenderLogin";
 import VenderReg from "./venderviews/VenderReg";
 import VenderHome from "./venderviews/VenderHome";
 import Navbar from "./Navbar";
+import OrderTrackingPerBillId from "./customerviews/OrderTrackingPerBillId";
+
 console.log(process.env.REACT_APP_BASE_API_URL);
 function App() {
   return (
@@ -46,6 +48,7 @@ function App() {
           <Route path="customerlogin" element={<CustomerLogin />} />
           <Route path="customerreg" element={<CustomerReg />} />
           <Route path="customerhome" element={<CustomerHome />} />
+         <Route path="/customermain/track/:billid" element={<OrderTrackingPerBillId />} />
         </Route>
 
         {/* VENDOR */}

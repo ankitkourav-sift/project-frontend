@@ -47,18 +47,14 @@ function CustomerHome() {
 
   // ================= CUSTOMER ID =================
 
-  const customerId = useMemo(() => {
+ const customerId = useMemo(() => {
+  if (!user) return null;
 
-    if (!user) return null;
+  return String(user.Cid);
+}, [user]);
+console.log("USER:", user);
+console.log("customerId:", customerId);
 
-    return String(
-      user._id ||
-      user.Cid ||
-      user.cid ||
-      user.CUserId
-    );
-
-  }, [user]);
 
   // ================= LOGOUT =================
 

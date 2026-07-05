@@ -13,6 +13,16 @@ function CityMgt() {
     const [ctlist, setCtList] = useState([]);
     const [stlist, setStList] = useState([]);
 
+
+    const loadCities = () => {
+    axios.get(`${REACT_APP_BASE_API_URL}/city/getall`)
+        .then((res) => {
+            setCtList(res.data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
+};
     // input handlers
     const handleCtIdText = (evt) => {
         setCtId(evt.target.value);
@@ -45,16 +55,8 @@ function CityMgt() {
 
     // load cities
     useEffect(() => {
-
-        axios.get(`${REACT_APP_BASE_API_URL}/city/getall`)
-            .then((res) => {
-                setCtList(res.data);
-            })
-            .catch((err) => {
-                alert(err);
-            });
-
-    }, []);
+    loadCities();
+}, []);
 
     // new button
     const handleAddNewButton = () => {
@@ -96,6 +98,8 @@ function CityMgt() {
                     axios.post(`${REACT_APP_BASE_API_URL}/city/save`, obj)
                         .then((res) => {
                             alert(res.data);
+                                loadCities();
+
                             setCtId("");
                             setCtName("");
                             setStId("");
@@ -119,6 +123,8 @@ function CityMgt() {
         axios.get(`${REACT_APP_BASE_API_URL}/city/getall`)
             .then((res) => {
                 setCtList(res.data);
+                    loadCities();
+
             })
             .catch((err) => {
                 alert(err);
@@ -193,6 +199,8 @@ function CityMgt() {
         axios.put(`${REACT_APP_BASE_API_URL}/city/update`, obj)
             .then((res) => {
                 alert(res.data);
+                    loadCities();
+
                 setCtId("");
                 setCtName("");
                 setStId("");
@@ -212,6 +220,8 @@ function CityMgt() {
             axios.delete(`${REACT_APP_BASE_API_URL}/city/delete/${ctid}`)
                 .then((res) => {
                     alert(res.data);
+                        loadCities();
+
                 })
                 .catch((err) => {
                     alert(err);
@@ -315,9 +325,9 @@ function CityMgt() {
                                     <button onClick={handleSaveButton} className="btn btn-primary">Save</button>
                                 </td>
 
-                                <td>
+                                {/* <td>
                                     <button onClick={handleShowButton} className="btn btn-primary">Show</button>
-                                </td>
+                                </td> */}
 
                                 <td>
                                     <button onClick={handleSearchButton} className="btn btn-primary">Search</button>

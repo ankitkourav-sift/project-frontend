@@ -1,7 +1,9 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function VenderMgt(){
+    const REACT_APP_BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
+    
     const[venderlist,setVenderList]=useState([]);
     const[selectedVender,setSelectedVender]=useState(null);
     const[showModal,setShowModal]=useState(false);
@@ -18,11 +20,19 @@ function VenderMgt(){
         fetchVenders();
     },[]);
 
-    const fetchVenders=()=>{
-        axios.get(`https://project-backend-nka5.vercel.app/vender/getvendercount`)
-        .then((res)=> setVenderList(res.data))
-        .catch(err=> alert(err));
-    };
+  const fetchVenders = async () => {
+    try {
+        const res = await axios.get(
+            `${REACT_APP_BASE_API_URL}/vender/getvendercount`
+        );
+
+        setVenderList(res.data);
+
+    } catch (err) {
+        console.log(err);
+        alert("Unable to load vendors");
+    }
+};
 
     // ✅ FIX: previewImage direct Cloudinary URL use karega
     const openEditModal=(vender)=>{
@@ -59,41 +69,85 @@ function VenderMgt(){
         return !!existing;
     };
 
-    const handleEditSave=async()=>{
-        if(await checkEmailDuplicate()){
-            alert("This email is already used by another vendor");
-            return;
+    const handleEditSave = async () => {
+
+    if (await checkEmailDuplicate()) {
+        alert("This email is already used by another vendor");
+        return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("VenderName", editForm.VenderName);
+    formData.append("VAddress", editForm.VAddress);
+    formData.append("VContact", editForm.VContact);
+    formData.append("VEmail", editForm.VEmail);
+
+    if (editForm.VPicName) {
+        formData.append("file", editForm.VPicName);
+    }
+
+    try {
+
+        const res = await axios.put(
+            `${REACT_APP_BASE_API_URL}/vender/update/${selectedVender.VUserId}`,
+            formData
+        );
+
+        alert(res.data.message);
+
+        setShowModal(false);
+
+        fetchVenders();
+
+    } catch (err) {
+
+        console.log(err);
+
+        if (err.response) {
+            alert(err.response.data);
+        } else {
+            alert("Server Error");
         }
 
-        const formData=new FormData();
-        formData.append("VenderName", editForm.VenderName);
-        formData.append("VAddress", editForm.VAddress);
-        formData.append("VContact", editForm.VContact);
-        formData.append("VEmail", editForm.VEmail);
-
-        if(editForm.VPicName) formData.append("file", editForm.VPicName);
-
-        axios.put(
-            `https://project-backend-nka5.vercel.app/vender/update/${selectedVender.VUserId}`,
-            formData
-        )
-        .then(res=>{
-            alert(res.data.message);
-            setShowModal(false);
-            fetchVenders();
-        })
-        .catch(err=> alert(err));
-    };
-
-    const toggleStatus = (vid,status)=>{
-        axios.put(
-            `https://project-backend-nka5.vercel.app/vender/vendermanage/${vid}/${status==="Active"?"Inactive":"Active"}`
-        )
-        .then(()=>{
-            fetchVenders();
-        })
-        .catch(err=> alert(err));
     }
+
+};
+
+  const toggleStatus = async (vid, status) => {
+
+    try {
+
+        const newStatus =
+            status.toLowerCase() === "active"
+                ? "Inactive"
+                : "Active";
+
+        console.log("Vid =", vid);
+        console.log("Old Status =", status);
+        console.log("New Status =", newStatus);
+
+        const res = await axios.put(
+            `${REACT_APP_BASE_API_URL}/vender/vendermanage/${vid}/${newStatus}`
+        );
+
+        alert(res.data);
+
+        fetchVenders();
+
+    } catch (err) {
+
+        console.log(err);
+
+        if (err.response) {
+            alert(err.response.data);
+        } else {
+            alert("Server Error");
+        }
+
+    }
+
+};
 
    return(
     <div>
@@ -132,9 +186,11 @@ function VenderMgt(){
                             <td>{item.Status}</td>
 
                             <td>
-                               <button onClick={()=>toggleStatus(item.Vid, item.Status)}>
-                                {item.Status==="Active" ? "Inactive" : "Active"}
-                               </button>
+                               <button
+    onClick={() => toggleStatus(item.Vid, item.Status)}
+>
+    {item.Status === "Active" ? "Inactive" : "Active"}
+</button>
                             </td>
 
                             <td>

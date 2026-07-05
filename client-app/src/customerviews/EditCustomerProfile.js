@@ -192,97 +192,73 @@ function EditCustomerProfile({
   };
 
   // ================= UPDATE =================
+// ================= UPDATE =================
+const handleSubmit = async () => {
+  if (!validate()) return;
 
-  const handleSubmit = async () => {
+  try {
+    const form = new FormData();
 
-    if (!validate()) return;
+    form.append("CustomerName", formData.CustomerName);
+    form.append("CUserId", formData.CUserId);
+    form.append("StId", formData.StId);
+    form.append("CtId", formData.CtId);
+    form.append("CAddress", formData.CAddress);
+    form.append("CContact", formData.CContact);
+    form.append("CEmail", formData.CEmail);
 
-    try {
-
-      const form = new FormData();
-
-      form.append(
-        "CustomerName",
-        formData.CustomerName
-      );
-
-      form.append(
-        "CUserId",
-        formData.CUserId
-      );
-
-      form.append(
-        "StId",
-        formData.StId
-      );
-
-      form.append(
-        "CtId",
-        formData.CtId
-      );
-
-      form.append(
-        "CAddress",
-        formData.CAddress
-      );
-
-      form.append(
-        "CContact",
-        formData.CContact
-      );
-
-      form.append(
-        "CEmail",
-        formData.CEmail
-      );
-
-      // IMAGE
-      if (newImage) {
-        form.append("file", newImage);
-      }
-
-      const res = await axios.put(
-        `https://project-backend-nka5.vercel.app/customer/update/${cid}`,
-        form,
-        {
-          headers: {
-            "Content-Type":
-              "multipart/form-data",
-          },
-        }
-      );
-
-      alert(res.data.message);
-
-      const updatedUser =
-        res.data.customer;
-
-      // SAVE SESSION
-      localStorage.setItem(
-        "userSession",
-        JSON.stringify(updatedUser)
-      );
-
-      sessionStorage.setItem(
-        "userSession",
-        JSON.stringify(updatedUser)
-      );
-
-      // UPDATE PARENT
-      onUpdate(updatedUser);
-
-      onClose();
-
-    } catch (err) {
-
-      console.error(err);
-
-      alert(
-        err.response?.data?.message ||
-          "Update Error"
-      );
+    if (newImage) {
+      form.append("file", newImage);
     }
-  };
+console.log("===== FORM DATA =====");
+console.log("Cid:", formData.Cid);
+console.log("CUserId:", formData.CUserId);
+console.log("_id:", formData._id);
+console.log(formData);
+    const res = await axios.put(
+      `https://project-backend-nka5.vercel.app/customer/update/${cid}`,
+      form,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    alert(res.data.message);
+
+    const updatedUser = res.data.customer;
+    
+
+console.log("UPDATED USER FULL:");
+console.log(updatedUser);
+
+console.log("Mongo _id:", updatedUser._id);
+console.log("Cid:", updatedUser.Cid);
+console.log("CUserId:", updatedUser.CUserId);
+
+    // ✅ FIX 1: ONLY ONE STORAGE (REMOVE sessionStorage)
+    localStorage.setItem(
+      "userSession",
+      JSON.stringify(updatedUser)
+    );
+
+    // ❌ REMOVE THIS (causes confusion/re-render issues)
+    // sessionStorage.setItem("userSession", JSON.stringify(updatedUser));
+
+    // ✅ FIX 2: SAFE PARENT UPDATE (IMPORTANT)
+    onUpdate({
+      ...updatedUser,
+      _safeUpdate: true,
+    });
+
+    onClose();
+
+  } catch (err) {
+    console.error(err);
+    alert(err.response?.data?.message || "Update Error");
+  }
+};
 
   return (
     <div className="edit-profile-container">

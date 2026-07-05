@@ -7,16 +7,22 @@ function AdminLogin() {
   const [upass, setUpass] = useState("");
   const navigate = useNavigate();
 
-  const handleLoginButton = () => {
-    const savedId = localStorage.getItem("adminId");
-    const savedPass = localStorage.getItem("adminPass");
+  // Permanent Admin Credentials
+  const ADMIN_NAME = "Ankit";
+  const ADMIN_UID = "admin";
+  const ADMIN_PASSWORD = "Admin@123";
 
-    if (uid === savedId && upass === savedPass) {
+  const handleLoginButton = () => {
+    if (
+      (uid === ADMIN_NAME || uid === ADMIN_UID) &&
+      upass === ADMIN_PASSWORD
+    ) {
       localStorage.setItem("adminAuth", "true");
       localStorage.setItem("admintoken", "12345");
+
       navigate("/adminmain/adminhome");
     } else {
-      alert("Invalid credentials");
+      alert("Invalid User ID/Name or Password");
     }
   };
 
@@ -27,7 +33,7 @@ function AdminLogin() {
 
         <input
           type="text"
-          placeholder="Admin Name"
+          placeholder="Admin Name / User ID"
           value={uid}
           onChange={(e) => setUid(e.target.value)}
         />
@@ -37,9 +43,17 @@ function AdminLogin() {
           placeholder="Password"
           value={upass}
           onChange={(e) => setUpass(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleLoginButton();
+            }
+          }}
         />
 
-        <button className="adminLogin-button" onClick={handleLoginButton}>
+        <button
+          className="adminLogin-button"
+          onClick={handleLoginButton}
+        >
           Login
         </button>
       </div>

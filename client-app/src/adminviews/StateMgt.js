@@ -11,6 +11,17 @@ function StateMgt() {
     const [status, setStatus] = useState("");
     const [stlist, setStList] = useState([]);
 
+    const loadStates = () => {
+    axios
+        .get(`${REACT_APP_BASE_API_URL}/state/getall`)
+        .then((res) => {
+            setStList(res.data);
+        })
+        .catch((err) => {
+            alert(err);
+        });
+};
+
     const handleStIdText = (evt) => {
         setStId(evt.target.value);
     };
@@ -24,17 +35,9 @@ function StateMgt() {
     };
 
     // load states at startup
-    useEffect(() => {
-
-        axios.get(`${REACT_APP_BASE_API_URL}/state/getall`)
-            .then((res) => {
-                setStList(res.data);
-            })
-            .catch((err) => {
-                alert(err);
-            });
-
-    }, []);
+   useEffect(() => {
+    loadStates();
+}, []);
 
     // New button
     const handleAddNewButton = () => {
@@ -75,9 +78,15 @@ function StateMgt() {
                     axios.post(`${REACT_APP_BASE_API_URL}/state/save`, obj)
                         .then((res) => {
                             alert(res.data);
-                            setStId("");
-                            setStName("");
-                            setStatus("");
+                           alert(res.data);
+
+                        alert(res.data);
+
+setStId("");
+setStName("");
+setStatus("");
+
+loadStates();
                         })
                         .catch((err) => {
                             alert(err);
@@ -93,17 +102,18 @@ function StateMgt() {
     };
 
     // Show
-    const handleShowButton = () => {
+    // const handleShowButton = () => {
 
-        axios.get(`${REACT_APP_BASE_API_URL}/state/getall`)
-            .then((res) => {
-                setStList(res.data);
-            })
-            .catch((err) => {
-                alert(err);
-            });
+    //     axios.get(`${REACT_APP_BASE_API_URL}/state/getall`)
+    //         .then((res) => {
+    //             setStList(res.data);
+    //             loadStates();
+    //         })
+    //         .catch((err) => {
+    //             alert(err);
+    //         });
 
-    };
+    // };
 
     // Search
     const handleSearchButton = () => {
@@ -172,6 +182,7 @@ function StateMgt() {
                 setStId("");
                 setStName("");
                 setStatus("");
+                loadStates();
             })
             .catch((err) => {
                 alert(err);
@@ -187,6 +198,7 @@ function StateMgt() {
             axios.delete(`${REACT_APP_BASE_API_URL}/state/delete/${stid}`)
                 .then((res) => {
                     alert(res.data);
+                    loadStates();
                 })
                 .catch((err) => {
                     alert(err);
@@ -265,9 +277,9 @@ function StateMgt() {
                                     <button onClick={handleSaveButton} className="btn btn-primary">Save</button>
                                 </td>
 
-                                <td>
+                                {/* <td>
                                     <button onClick={handleShowButton} className="btn btn-primary">Show</button>
-                                </td>
+                                </td> */}
 
                                 <td>
                                     <button onClick={handleSearchButton} className="btn btn-primary">Search</button>

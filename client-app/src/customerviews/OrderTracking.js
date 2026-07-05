@@ -17,6 +17,20 @@ function OrderTracking({ CUserId }) {
   const [billid, setBillid] = useState("");
   const [order, setOrder] = useState(null);
 
+  useEffect(() => {
+  console.log("CUserId received:", CUserId);
+
+  if (!CUserId) return;
+
+  axios
+    .get(`https://project-backend-nka5.vercel.app/bill/billshowbillids/${CUserId}`)
+    .then((res) => {
+      console.log("Bill IDs API:", res.data);
+      setBillIds(res.data);
+    })
+    .catch((err) => console.log(err));
+}, [CUserId]);
+
   // load bills
   useEffect(() => {
     if (!CUserId) return;
