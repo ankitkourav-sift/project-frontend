@@ -152,9 +152,9 @@ function VenderHome({ vender, onLogout }) {
         {/* PASSWORD */}
         {isChangePass && (
           <VenderChangePass
-            CUserid={venderData?.Vid}
-            onClose={() => setIsChangePass(false)}
-          />
+    VUserId={venderData?.VUserId}
+    onClose={() => setIsChangePass(false)}
+/>
         )}
 
         {/* PRODUCT PANEL */}
