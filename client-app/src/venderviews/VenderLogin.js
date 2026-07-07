@@ -2,6 +2,7 @@ import React ,{ useEffect, useState } from "react";
 import axios from "axios";
 import "./VenderLogin.css";
 import VenderHome from "./VenderHome";
+import VenderForgotPassword from "../venderviews/VenderForgotPassword";
 
 function VenderLogin(){
 
@@ -10,6 +11,7 @@ function VenderLogin(){
     const [rememberMe,setRememberMe]=useState(false);
     const [vender,setVender]=useState(null);
     const [showForget,setShowForget]=useState(false);
+    
 
     const REACT_APP_BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
     console.log(REACT_APP_BASE_API_URL);
@@ -84,11 +86,17 @@ function VenderLogin(){
         localStorage.removeItem("venderSession");
 
     };
-
+// Forgot Password Screen
+if (showForget) {
+    return (
+        <VenderForgotPassword
+            onBack={() => setShowForget(false)}
+        />
+    );
+}
     // ⭐ VendorHome Render
-    if (vender) {
-        return <VenderHome vender={vender} onLogout={handleLogout} />;
-    }
+    
+ 
 
     return(
 
@@ -130,14 +138,24 @@ function VenderLogin(){
                 >
                     Login
                 </button>
-
+{/* 
                 <button 
                     onClick={handleLogout}
                     className="venderlogin-button"
                     style={{backgroundColor:"#555",marginTop:"10px"}}
                 >
                     Logout
-                </button>
+                </button> */}
+                <p
+    style={{
+        color: "blue",
+        cursor: "pointer",
+        marginTop: "10px"
+    }}
+    onClick={() => setShowForget(true)}
+>
+    Forgot Password?
+</p>
 
             </div>
 
