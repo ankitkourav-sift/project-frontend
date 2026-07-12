@@ -6,8 +6,9 @@ function CustomerMain() {
     <div className="customerMainRoot">
 
       <div className="customerMainNav">
-        <Link to="customerlogin">Login</Link>
-        <Link to="customerreg">Register</Link>
+     <Link to="/customermain">Shop</Link>
+<Link to="customerlogin">Login</Link>
+<Link to="customerreg">Register</Link>
       </div>
 
       <div className="customerMainOutlet">

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+
 import MainPage from "./MainPage";
 
 // ADMIN
@@ -14,6 +15,7 @@ import CustomerMain from "./customerviews/CustomerMain";
 import CustomerLogin from "./customerviews/CustomerLogin";
 import CustomerReg from "./customerviews/CustomerReg";
 import CustomerHome from "./customerviews/CustomerHome";
+import ProductCatalog from "./productviews/ProductCatalog";
 // VENDOR
 import VenderMain from "./venderviews/VenderMain";
 import VenderLogin from "./venderviews/VenderLogin";
@@ -43,13 +45,12 @@ function App() {
         </Route>
 
         {/* CUSTOMER */}
-        <Route path="/customermain" element={<CustomerMain />}>
-          <Route index element={<Navigate to="customerlogin" replace />} />
-          <Route path="customerlogin" element={<CustomerLogin />} />
-          <Route path="customerreg" element={<CustomerReg />} />
-          <Route path="customerhome" element={<CustomerHome />} />
-         {/* //<Route path="/customermain/track/:billid" element={<OrderTrackingPerBillId />} /> */}
-        </Route>
+   <Route path="/customermain" element={<CustomerMain />}>
+  <Route index element={<ProductCatalog mode="main" />} />
+  <Route path="customerlogin" element={<CustomerLogin />} />
+  <Route path="customerreg" element={<CustomerReg />} />
+  <Route path="customerhome" element={<CustomerHome />} />
+</Route>
 
         {/* VENDOR */}
         <Route path="/vendermain" element={<VenderMain />}>

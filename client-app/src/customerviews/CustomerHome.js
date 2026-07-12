@@ -32,16 +32,15 @@ function CustomerHome() {
 
   useEffect(() => {
 
-    const raw =
-      localStorage.getItem("userSession") ||
-      sessionStorage.getItem("userSession");
+   const raw =
+  localStorage.getItem("userSession") ||
+  sessionStorage.getItem("userSession");
 
-    if (!raw) {
-      navigate("/customermain/customerlogin");
-      return;
-    }
+if (raw) {
+  setUser(JSON.parse(raw));
+}
 
-    setUser(JSON.parse(raw));
+    
 
   }, [navigate]);
 
@@ -67,10 +66,9 @@ function CustomerHome() {
   };
 
   // ================= LOADING =================
-
-  if (!user) {
-    return <h3 className="loading">Loading...</h3>;
-  }
+if (!user) {
+    return <h3>Loading...</h3>;
+}
 
   return (
     <div className="home-container">
@@ -138,9 +136,9 @@ function CustomerHome() {
 
           {activeTab === "shop" && (
             <ProductCatalog
-              mode="main"
-              cid={customerId}
-            />
+    mode="main"
+    cid={null}
+/>
           )}
 
           {activeTab === "orders" && (

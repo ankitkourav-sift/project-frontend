@@ -1,0 +1,75 @@
+.return-container {
+  padding: 25px;
+}
+
+.return-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+.table-box {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.table-box table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-box th {
+  background: #2874f0;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.table-box td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.table-box tr:hover {
+  background: #f5f7ff;
+}
+
+.status {
+  background: orange;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.empty-msg {
+  text-align: center;
+  color: red;
+  margin-top: 40px;
+}
+.btn-box {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.approve-btn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.reject-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}

@@ -92,3 +92,31 @@
   color: gray;
   margin-top: 20px;
 }
+
+.cancel-btn {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cancel-btn:hover {
+  background: #c62828;
+}
+
+.return-btn {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.return-btn:hover {
+  background: #f57c00;
+}

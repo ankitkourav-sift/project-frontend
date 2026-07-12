@@ -17,6 +17,7 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
   const [showProductPopup, setShowProductPopup] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const [pendingCheckout, setPendingCheckout] = useState(false);
 
   // ZOOM REFS
   const imgRef = useRef(null);
@@ -121,16 +122,29 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
   }, [plist, isCheckingOut]);
 
   // CART ACTIONS
-  const handleBuyButton = (pid) => {
-    if (mode === "main" && !cid) return setShowLogin(true);
-    const maxStock = stockMap[pid] ?? 0;
-    if (maxStock <= 0) return alert("Out of stock");
-    const product = plist.find((p) => p.pid === pid);
-    setSelItems((items) => (items.find((i) => i.pid === pid) ? items : [...items, product]));
-    setQuantities((q) => ({ ...q, [pid]: 1 }));
-    setItemCount((c) => (quantities[pid] ? c : c + 1));
-  };
+const handleBuyButton = (pid) => {
+  const maxStock = stockMap[pid] ?? 0;
 
+  if (maxStock <= 0) {
+    alert("Out of stock");
+    return;
+  }
+
+  const product = plist.find((p) => p.pid === pid);
+
+  setSelItems((items) =>
+    items.find((i) => i.pid === pid)
+      ? items
+      : [...items, product]
+  );
+
+  setQuantities((q) => ({
+    ...q,
+    [pid]: 1,
+  }));
+
+  setItemCount((c) => c + 1);
+};
   const increaseQty = (pid) => {
     const currentQty = quantities[pid] || 0;
     const maxStock = initialStockMap[pid] ?? 0;
@@ -157,23 +171,41 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
   const getValidCartItems = () => selitems
     .map((item) => ({ pid: item.pid, vid: item.vid ?? item.venderId, qty: quantities[item.pid] || 0 }))
     .filter((item) => item.qty > 0 && item.vid);
+const handleCheckout = async () => {
+  if (!cid) {
+    setPendingCheckout(true);
+    setShowLogin(true);
+    return;
+  }
 
-  const handleCheckout = async () => {
-    if (mode === "main" && !cid) return setShowLogin(true);
-    const validItems = getValidCartItems();
-    if (!validItems.length) return alert("Cart is empty");
-    try {
-      setIsCheckingOut(true);
-      await axios.post(`${API}/inventory/validate-stock`, { items: validItems });
-      setShowBill(true);
-    } catch (err) {
-      alert(err.response?.data?.message || "Stock changed. Refreshing...");
-      await reloadStock();
-    } finally {
-      setIsCheckingOut(false);
-    }
-  };
+  const validItems = getValidCartItems();
 
+  if (!validItems.length) {
+    alert("Cart is empty");
+    return;
+  }
+
+  try {
+    setIsCheckingOut(true);
+
+    await axios.post(
+      `${API}/inventory/validate-stock`,
+      { items: validItems }
+    );
+
+    setShowBill(true);
+
+  } catch (err) {
+    alert(
+      err.response?.data?.message ||
+      "Stock changed"
+    );
+
+    await reloadStock();
+  } finally {
+    setIsCheckingOut(false);
+  }
+};
   const grandTotal = selitems.reduce(
     (sum, item) => sum + (quantities[item.pid] || 1) * Number(item.oprice || 0),
     0
@@ -194,28 +226,46 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
   return (
     <>
       {showBill && (
-        <Bill
-          data={{ selitems, cid, quantities }}
-          onBack={() => setShowBill(false)}
-          onPaymentSuccess={async () => {
-            setSelItems([]);
-            setQuantities({});
-            setItemCount(0);
-            setShowBill(false);
-            await reloadStock();
-          }}
-        />
+   <Bill
+  data={{ selitems, cid, quantities }}
+  onBack={() => setShowBill(false)}
+  onRequireLogin={() => {
+    setShowBill(false);
+    setShowLogin(true);
+  }}
+  onPaymentSuccess={async () => {
+    setSelItems([]);
+    setQuantities({});
+    setItemCount(0);
+    setShowBill(false);
+    await reloadStock();
+  }}
+/>
       )}
 
       {showLogin && (
-        <CustomerLoginPopup
-          onClose={() => setShowLogin(false)}
-          onLoginSuccess={(s) => {
-            setCustomerSession(s);
-            setCId(s.cid);
-            setShowLogin(false);
-          }}
-        />
+<CustomerLoginPopup
+  onClose={() => {
+    setShowLogin(false);
+    setPendingCheckout(false);
+  }}
+  onLoginSuccess={(user) => {
+    const customerId =
+      user.Cid || user.cid || user.CUserId;
+
+    setCustomerSession(user);
+    setCId(customerId);
+    setShowLogin(false);
+
+    if (pendingCheckout) {
+      setPendingCheckout(false);
+
+      setTimeout(() => {
+        handleCheckout();
+      }, 200);
+    }
+  }}
+/>
       )}
 
       <div className={showLogin || showBill ? "blurred-content" : ""}>
@@ -224,7 +274,11 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
           <div className="customer-left">
             {customerSession ? (
               <>
-                <span>{customerSession.cfname}</span>
+                <span>
+  {customerSession?.cfname ||
+   customerSession?.CustomerName ||
+   customerSession?.CName}
+</span>
                 <button
                   className="logout-btn"
                   onClick={() => {
@@ -242,9 +296,15 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
           </div>
           <div className="customer-right">
             <strong onClick={() => setShowCart(true)}>{itemcount}</strong>
-            <button className="checkout-btn" onClick={handleCheckout}>
-              Checkout
-            </button>
+   <div className="customer-right">
+  <button
+    className="cart-btn"
+    onClick={() => setShowCart(true)}
+  >
+    🛒 Cart
+    <span className="cart-count">{itemcount}</span>
+  </button>
+</div>
           </div>
         </div>
 

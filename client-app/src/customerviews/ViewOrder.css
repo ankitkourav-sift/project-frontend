@@ -1,129 +1,228 @@
-/* ================= ROOT WRAPPER ================= */
+/* ================= PAGE ================= */
 .order-container {
-  padding: 20px;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
-  font-family: Arial, sans-serif;
-  color: #222;
-  background: #f7f8fc;
+  padding: 30px;
+  background: #f1f3f6;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* ================= HEADER ================= */
 .order-container h2 {
   text-align: center;
+  color: #172337;
   margin-bottom: 10px;
-  color: #1e2a38;
+  font-size: 32px;
 }
 
 .order-container p {
-  text-align: center;
   color: #666;
 }
 
-/* ================= FILTER DROPDOWN ================= */
+/* ================= FILTER ================= */
 .order-container select {
-  display: block;
-  margin: 15px auto;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 12px 18px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
   background: white;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+/* ================= STATUS TABS ================= */
+.order-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.order-tabs button {
+  border: none;
+  background: white;
+  color: #444;
+  padding: 12px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+}
+
+.order-tabs button:hover {
+  transform: translateY(-3px);
+}
+
+.active-tab {
+  background: #2874f0 !important;
+  color: white !important;
 }
 
 /* ================= ORDER CARD ================= */
 .order-card {
   background: white;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 20px 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: 0.3s;
 }
 
-/* ================= BILL TITLE ================= */
+.order-card:hover {
+  transform: translateY(-3px);
+}
+
 .order-card h3 {
-  margin-bottom: 10px;
-  color: #2b2b2b;
+  color: #172337;
+  margin-bottom: 15px;
+}
+
+/* ================= STATUS ================= */
+.order-card strong {
+  color: #2874f0;
+  font-size: 17px;
 }
 
 /* ================= TABLE ================= */
 .order-card table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .order-card th {
-  background: #4a90e2;
+  background: #2874f0;
   color: white;
-  padding: 10px;
-  text-align: left;
+  padding: 14px;
+  font-size: 15px;
 }
 
 .order-card td {
-  padding: 10px;
+  padding: 16px;
   border-bottom: 1px solid #eee;
-  color: #333;
+  vertical-align: middle;
+}
+
+.order-card tr:hover {
+  background: #fafafa;
 }
 
 /* ================= PRODUCT IMAGE ================= */
 .order-card img {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
   object-fit: cover;
-  border-radius: 6px;
   border: 1px solid #ddd;
-}
-
-/* ================= QTY BUTTON LOOK ================= */
-.order-card td button {
-  padding: 4px 8px;
-  margin: 0 5px;
-  border: none;
-  background: #4a90e2;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 /* ================= TOTAL ================= */
 .total {
+  margin-top: 20px;
   text-align: right;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
-  margin-top: 10px;
-  color: #111;
+  color: #172337;
+}
+
+/* ================= BUTTON AREA ================= */
+.order-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 /* ================= PDF BUTTON ================= */
-.order-card button {
-  margin-top: 10px;
-  padding: 8px 15px;
+.pdf-btn {
   background: #27ae60;
   color: white;
   border: none;
-  border-radius: 6px;
+  padding: 12px 22px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
   transition: 0.3s;
 }
 
-.order-card button:hover {
-  background: #219150;
+.pdf-btn:hover {
+  background: #1f8b4d;
 }
 
-/* ================= EMPTY STATE ================= */
-.order-container h3 {
-  text-align: center;
-  color: red;
+/* ================= CANCEL BUTTON ================= */
+.cancel-btn {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
-/* ================= RESPONSIVE ================= */
+.cancel-btn:hover {
+  background: #c62828;
+}
+
+/* ================= RETURN BUTTON ================= */
+.return-btn {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.return-btn:hover {
+  background: #f57c00;
+}
+
+/* ================= REASONS ================= */
+.cancel-reason {
+  color: #e53935;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.return-reason {
+  color: #ff9800;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* ================= MOBILE ================= */
 @media (max-width: 768px) {
+  .order-container {
+    padding: 15px;
+  }
+
+  .order-card {
+    padding: 15px;
+  }
+
   .order-card table {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .order-card img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .total {
+    font-size: 18px;
+  }
+
+  .order-actions {
+    flex-direction: column;
+  }
+
+  .order-actions button {
+    width: 100%;
   }
 }

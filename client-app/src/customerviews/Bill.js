@@ -3,7 +3,14 @@ import axios from "axios";
 import logo from "../logo.svg";
 import {toast,ToastContainer} from "react-toastify";
 
-function Bill ({data,onBack, onPaymentSuccess,onUpdateCart,onRemoveItem})
+function Bill({
+  data,
+  onBack,
+  onPaymentSuccess,
+  onUpdateCart,
+  onRemoveItem,
+  onRequireLogin
+})
 {
   const [customer, setCustomer] = useState({name:"", address:"", contact:""});
   const [date,setDate]= useState("");

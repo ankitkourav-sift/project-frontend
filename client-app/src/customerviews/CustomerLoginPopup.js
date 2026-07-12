@@ -24,74 +24,82 @@
                 }
              },[]);
 
-             const handleLoginButton = async () => {
-                setAuthError("");
-                setLoading(true);
+     const handleLoginButton = async () => {
+  setAuthError("");
+  setLoading(true);
 
-                try{
-                    const res = await axios.post("https://project-backend-nka5.vercel.app/customer/login", 
-                        {
-                            CUserId : uid,
-                            CUserPass : upass,
-                        }
-                    );
+  try {
+    const API = process.env.REACT_APP_BASE_API_URL;
 
-                    if(res.data.CUserId)
-                    {
-                        if(res.data.Status === "Inactive")
-                        {
-                            alert("User not active. Please wait for admin activation");
-                            setLoading(false);
-                            return;
-                        }
+    const res = await axios.post(
+      `${API}/customer/login`,
+      {
+        CUserId: uid,
+        CUserPass: upass,
+      }
+    );
 
-                        if(isChecked)
-                        {
-                            Cookies.set(
-                                "auth",JSON.stringify({username:uid,password:upass}),{expires:7}
-                            );
-                        }
+    console.log("Login Response:", res.data);
 
-                        const sessionData = {
-                            cfname: res.data.CustomerName,
-                            cpicname: res.data.CPicName,
-                            cid:res.data.Cid,
-                        }
+    if (res.data.success && res.data.customer) {
+      const customer = res.data.customer;
 
-                        if(isChecked)
-                        {
-                            localStorage.setItem("userSession",JSON.stringify(sessionData));
-                        }
-                        else
-                        {
-                          sessionStorage.setItem("userSession",JSON.stringify(sessionData));
-                        }
+      if (customer.Status === "Inactive") {
+        alert("User not active. Please wait for admin activation");
+        setLoading(false);
+        return;
+      }
 
-                        onLoginSuccess(sessionData);
-                        onClose();
+      if (isChecked) {
+        Cookies.set(
+          "auth",
+          JSON.stringify({
+            username: uid,
+            password: upass,
+          }),
+          { expires: 7 }
+        );
+      }
 
-                    }
+      const sessionData = {
+        Cid: customer.Cid,
+        CUserId: customer.CUserId,
+        CustomerName: customer.CustomerName,
+        CPicName: customer.CPicName,
+        CAddress: customer.CAddress,
+        CContact: customer.CContact,
+        CEmail: customer.CEmail,
+      };
 
-                    else
-                    {
-                        setAuthError("Authentication failed: Invalid ID or Password");
-                    }
-                } catch(err)
-                {
-                    if(err.response && err.response.status === 404)
-                    {
-                        setAuthError("Authentication failed : Invalid ID or Password");
-                    }
+      if (isChecked) {
+        localStorage.setItem(
+          "userSession",
+          JSON.stringify(sessionData)
+        );
+      } else {
+        sessionStorage.setItem(
+          "userSession",
+          JSON.stringify(sessionData)
+        );
+      }
 
-                    else
-                    {
-                        setAuthError("Login failed:"+ (err.response?.data?.message || err.message));
-                    }
-                } finally
-                {
-                    setLoading(false);
-                }
-             };
+      onLoginSuccess(sessionData);
+    } else {
+      setAuthError(
+        "Authentication failed: Invalid ID or Password"
+      );
+    }
+  } catch (err) {
+    console.log(err);
+
+    setAuthError(
+      err.response?.data?.message ||
+      "Authentication failed"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
              return(
     <div className="cl-popup-overlay">

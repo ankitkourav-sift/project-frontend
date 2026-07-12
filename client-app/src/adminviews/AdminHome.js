@@ -10,6 +10,8 @@ import ProductList from "./ProductList";
 import CustomerMgt from "./CustomerMgt";
 import UpdateOrderStatus from "./UpdateOrderStatus";
 import AdminVenderSales from "./AdminVenderSales";
+import ReturnRequests from "./ReturnRequests";
+import AdminDashboard from "./AdminDashboard";
 
 import "./AdminHome.css";
 
@@ -43,7 +45,12 @@ function AdminHome() {
         return <UpdateOrderStatus updateByName={"Admin"} />;
       case "sales":
         return <AdminVenderSales />;
+            case "returns":
+      return <ReturnRequests />;   
+      
       default:
+        
+  return <AdminDashboard />;
         return (
           <div className="welcome-box">
             <h2>Welcome Admin 👋</h2>
@@ -66,6 +73,7 @@ function AdminHome() {
         <button onClick={() => setActive("vender")}>Vender</button>
         <button onClick={() => setActive("bill")}>Bills</button>
         <button onClick={() => setActive("order")}>Order Status</button>
+        <button onClick={() => setActive("returns")}> Return Requests</button>
         <button onClick={() => setActive("product")}>Product</button>
         <button onClick={() => setActive("customer")}>Customer</button>
         <button onClick={() => setActive("sales")}>Vendor Sales</button>

@@ -60,6 +60,11 @@ function ProductCatgMgt() {
             })
             .catch((err) => alert(err));
     };
+    const handleNew = () => {
+  setPCatgName("");
+  setIsEditMode(false);
+  setPCatgId(pcatgList.length + 1);
+};
 
     const handleEdit = (item) => {
         setPCatgId(item.pcatgid);
@@ -67,99 +72,175 @@ function ProductCatgMgt() {
         setIsEditMode(true);
     };
 
-    return (
+    const handleDelete = (id) => {
+    if (!window.confirm("Are you sure you want to delete this category?")) {
+        return;
+    }
 
-        <div style={{ textAlign: "center", padding: "20px" }}>
+    axios.delete(
+        `${REACT_APP_BASE_API_URL}/productcatg/deleteproductcatg/${id}`
+    )
+    .then((res) => {
+        alert(res.data);
+        fetchCategoryList();
+    })
+    .catch((err) => alert(err));
+};
 
-            <h2 style={{ color: "blue" }}>Product Category Form</h2>
+   return (
+  <div style={{ textAlign: "center", padding: "20px" }}>
+    <h2 style={{ color: "#0d6efd", marginBottom: "20px" }}>
+      Product Category Form
+    </h2>
 
-            <table style={{ margin: "0 auto" }}>
-                <tbody>
+    <table
+      style={{
+        margin: "0 auto",
+        borderCollapse: "collapse",
+        minWidth: "400px",
+      }}
+    >
+      <tbody>
+        <tr>
+          <td
+            style={{
+              padding: "10px",
+              fontWeight: "bold",
+            }}
+          >
+            Product Id :
+          </td>
 
-                    <tr>
-                        <td>Product Id:</td>
-                        <td>{pcatgid}</td>
-                    </tr>
+          <td style={{ padding: "10px" }}>{pcatgid}</td>
+        </tr>
 
-                    <tr>
-                        <td>Category Name:</td>
-                        <td>
-                            <input
-                                type="text"
-                                value={pcatgname}
-                                className="form-control"
-                                onChange={(e) => setPCatgName(e.target.value)}
-                            />
-                        </td>
-                    </tr>
+        <tr>
+          <td
+            style={{
+              padding: "10px",
+              fontWeight: "bold",
+            }}
+          >
+            Category Name :
+          </td>
 
-                    <tr>
+          <td style={{ padding: "10px" }}>
+            <input
+              type="text"
+              value={pcatgname}
+              className="form-control"
+              placeholder="Enter Category Name"
+              onChange={(e) => setPCatgName(e.target.value)}
+            />
+          </td>
+        </tr>
 
-                        <td>
-                            {isEditmode ? (
-                                <button
-                                    style={{ width: "100px" }}
-                                    className="btn btn-primary"
-                                    onClick={handleUpdateButton}
-                                >
-                                    Update
-                                </button>
-                            ) : (
-                                <button
-                                    className="btn btn-primary"
-                                    style={{ width: "100px" }}
-                                    onClick={handleSaveButton}
-                                >
-                                    Save
-                                </button>
-                            )}
-                        </td>
+        <tr>
+          <td style={{ padding: "10px" }}>
+            {isEditmode ? (
+              <button
+                className="btn btn-warning"
+                style={{ width: "100px" }}
+                onClick={handleUpdateButton}
+              >
+                Update
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary"
+                style={{ width: "100px" }}
+                onClick={handleSaveButton}
+              >
+                Save
+              </button>
+            )}
+          </td>
 
-                        <td>
-                            <button
-                                className="btn btn-primary"
-                                style={{ width: "100px" }}
-                                onClick={fetchCategoryList}
-                            >
-                                Show
-                            </button>
-                        </td>
+          <td style={{ padding: "10px" }}>
+            <button
+              className="btn btn-success me-2"
+              style={{ width: "100px", marginRight: "10px" }}
+              onClick={handleNew}
+            >
+              New
+            </button>
 
-                    </tr>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-                </tbody>
-            </table>
+    <h3
+      style={{
+        color: "#0d6efd",
+        background: "#f1f3f5",
+        padding: "10px",
+        marginTop: "40px",
+        borderRadius: "10px",
+      }}
+    >
+      Product Category List
+    </h3>
 
-            <h3 style={{ color: "blue", backgroundColor: "lightgray", marginTop: "30px" }}>
-                Product Category List
-            </h3>
+    <table
+      border="1"
+      style={{
+        margin: "20px auto",
+        width: "70%",
+        textAlign: "center",
+        borderCollapse: "collapse",
+      }}
+    >
+      <thead style={{ background: "#0d6efd", color: "white" }}>
+        <tr>
+          <th style={{ padding: "10px" }}>Id</th>
+          <th style={{ padding: "10px" }}>Category Name</th>
+          <th style={{ padding: "10px" }}>Action</th>
+        </tr>
+      </thead>
 
-            <table border="1" style={{ margin: "0 auto", width: "70%", textAlign: "left" }}>
+      <tbody>
+        {pcatgList.length > 0 ? (
+          pcatgList.map((item) => (
+            <tr key={item.pcatgid}>
+              <td style={{ padding: "10px" }}>
+                {item.pcatgid}
+              </td>
 
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Category Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+              <td style={{ padding: "10px" }}>
+                {item.pcatgname}
+              </td>
 
-                <tbody>
-                    {pcatgList.map((item) => (
-                        <tr key={item.pcatgid}>
-                            <td>{item.pcatgid}</td>
-                            <td>{item.pcatgname}</td>
-                            <td>
-                                <button onClick={() => handleEdit(item)}>Edit</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
+              <td style={{ padding: "10px" }}>
+                <button
+                  className="btn btn-warning"
+                  style={{ marginRight: "10px" }}
+                  onClick={() => handleEdit(item)}
+                >
+                  Edit
+                </button>
 
-            </table>
-
-        </div>
-    );
-}
-
+                <button
+                  className="btn btn-danger"
+                  onClick={() =>
+                    handleDelete(item.pcatgid)
+                  }
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="3" style={{ padding: "20px" }}>
+              No Categories Found
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+); }
 export default ProductCatgMgt;

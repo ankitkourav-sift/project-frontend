@@ -16,35 +16,36 @@ function ViewOrders({ CUserId }) {
   const [products, setProducts] = useState([]); // ✅ NEW
   const [billFilter, setBillFilter] = useState("");
   const [loading, setLoading] = useState(true);
-
+const [statusFilter, setStatusFilter] = useState("All");
   const BASE_URL = "https://project-backend-nka5.vercel.app";
 
   // ================= LOAD ORDERS =================
-  useEffect(() => {
-    if (!data) {
-      setLoading(false);
-      return;
-    }
 
-    const fetchOrders = async () => {
-      try {
-        const res = await axios.get(
-          `${BASE_URL}/order/getorders/${data}`
-        );
+  const loadOrders = async () => {
+  try {
+    const res = await axios.get(
+      `${BASE_URL}/order/getorders/${data}`
+    );
 
-        console.log("ORDERS:", res.data);
+    setOrders(res.data || []);
+    setFiltered(res.data || []);
+  } catch (err) {
+    console.log(err);
+  }
 
-        setOrders(res.data || []);
-        setFiltered(res.data || []);
-      } catch (err) {
-        console.log(err);
-      }
+  setLoading(false);
+};
 
-      setLoading(false);
-    };
 
-    fetchOrders();
-  }, [data]);
+useEffect(() => {
+  if (!data) {
+    setLoading(false);
+    return;
+  }
+
+  loadOrders();
+}, [data]);
+
 
   // ================= LOAD PRODUCTS (FOR IMAGE) =================
   useEffect(() => {
@@ -74,6 +75,22 @@ function ViewOrders({ CUserId }) {
     if (!val) setFiltered(orders);
     else setFiltered(orders.filter((o) => o.billid === val));
   };
+
+
+
+  const displayOrders = filtered.filter((order) => {
+  if (statusFilter === "All") return true;
+
+  if (statusFilter === "Returned") {
+    return (
+      order.status === "Return Requested" ||
+      order.status === "Returned"
+    );
+  }
+
+  return order.status === statusFilter;
+});
+
 
   // ================= PDF =================
   const downloadPDF = (order) => {
@@ -105,89 +122,149 @@ function ViewOrders({ CUserId }) {
   if (!data)
     return <h3 style={{ color: "red" }}>Customer ID Missing</h3>;
 
+
+
   return (
-    <div className="order-container">
-      <h2>Your Orders</h2>
-      <p>Customer ID: {data}</p>
+  <div className="order-container">
+    <h2>Your Orders</h2>
+    <p>Customer ID: {data}</p>
 
-      {/* FILTER */}
-      <select onChange={handleFilter} value={billFilter}>
-        <option value="">All Orders</option>
-        {[...new Set(orders.map((o) => o.billid))].map((id, i) => (
-          <option key={i} value={id}>
-            {id}
-          </option>
-        ))}
-      </select>
+    {/* FILTER */}
+    <select onChange={handleFilter} value={billFilter}>
+      <option value="">All Orders</option>
 
-      {/* DATA */}
-      {filtered.length === 0 ? (
-        <p>No Orders Found</p>
-      ) : (
-        filtered.map((order) => (
-          <div className="order-card" key={order._id}>
-            <h3>Bill ID: {order.billid}</h3>
+      {[...new Set(orders.map((o) => o.billid))].map((id, i) => (
+        <option key={i} value={id}>
+          {id}
+        </option>
+      ))}
+    </select>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Product</th>
-                  <th>Qty</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
+    {/* DATA */}
+    {displayOrders.length === 0 ? (
+      <p>No Orders Found</p>
+    ) : (
+      displayOrders.map((order) => (
+        <div className="order-card" key={order._id}>
+          <h3>Bill ID: {order.billid}</h3>
 
-              <tbody>
-                {order.items.map((item, i) => (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
+          <p>
+            Status:
+            <strong> {order.status}</strong>
+          </p>
 
-                    {/* ✅ IMAGE + NAME */}
-                    <td
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {order.items.map((item, i) => (
+                <tr key={i}>
+                  <td>{i + 1}</td>
+
+                  <td
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <img
+                      src={getImage(item.pid)}
+                      alt="product"
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "cover",
+                        borderRadius: "6px",
                       }}
-                    >
-                      <img
-                        src={getImage(item.pid)}
-                        alt="product"
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          objectFit: "cover",
-                          borderRadius: "6px",
-                        }}
-                      />
-                      {item.pname}
-                    </td>
+                    />
 
-                    <td>{item.qty}</td>
-                    <td>₹{item.price * item.qty}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    {item.pname}
+                  </td>
 
-            {/* ✅ TOTAL FIX */}
-            <p className="total">
-              Total: ₹
-              {order.items.reduce(
-                (sum, item) => sum + item.qty * item.price,
-                0
-              )}
-            </p>
+                  <td>{item.qty}</td>
 
-            <button onClick={() => downloadPDF(order)}>
+                  <td>₹{item.price * item.qty}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <p className="total">
+            Total: ₹
+            {order.items.reduce(
+              (sum, item) => sum + item.qty * item.price,
+              0
+            )}
+          </p>
+
+          <div className="order-actions">
+            <button
+              className="pdf-btn"
+              onClick={() => downloadPDF(order)}
+            >
               Download PDF
             </button>
           </div>
-        ))
-      )}
-    </div>
-  );
-}
+        </div>
+      ))
+    )}
 
+    {/* STATUS FILTER BUTTONS */}
+    <div className="order-tabs">
+      <button
+        className={statusFilter === "All" ? "active-tab" : ""}
+        onClick={() => setStatusFilter("All")}
+      >
+        All
+      </button>
+
+      <button
+        className={
+          statusFilter === "Delivered"
+            ? "active-tab"
+            : ""
+        }
+        onClick={() =>
+          setStatusFilter("Delivered")
+        }
+      >
+        Delivered
+      </button>
+
+      <button
+        className={
+          statusFilter === "Cancelled"
+            ? "active-tab"
+            : ""
+        }
+        onClick={() =>
+          setStatusFilter("Cancelled")
+        }
+      >
+        Cancelled
+      </button>
+
+      <button
+        className={
+          statusFilter === "Return Requested"
+            ? "active-tab"
+            : ""
+        }
+        onClick={() =>
+          setStatusFilter("Return Requested")
+        }
+      >
+        Returned
+      </button>
+    </div>
+  </div>
+);}
 export default ViewOrders;
