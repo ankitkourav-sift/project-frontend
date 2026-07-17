@@ -12,7 +12,7 @@ import UpdateOrderStatus from "./UpdateOrderStatus";
 import AdminVenderSales from "./AdminVenderSales";
 import ReturnRequests from "./ReturnRequests";
 import AdminDashboard from "./AdminDashboard";
-
+import RefundRequests from "./RefundRequests";
 import "./AdminHome.css";
 
 function AdminHome() {
@@ -47,6 +47,8 @@ function AdminHome() {
         return <AdminVenderSales />;
             case "returns":
       return <ReturnRequests />;   
+      case "refund":
+  return <RefundRequests />;
       
       default:
         
@@ -77,6 +79,7 @@ function AdminHome() {
         <button onClick={() => setActive("product")}>Product</button>
         <button onClick={() => setActive("customer")}>Customer</button>
         <button onClick={() => setActive("sales")}>Vendor Sales</button>
+        <button onClick={() => setActive("refund")}>Refund Requests</button>
 
         <button className="logout" onClick={LogOutButtonClick}>
           Logout

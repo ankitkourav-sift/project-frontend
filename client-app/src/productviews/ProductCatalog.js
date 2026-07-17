@@ -5,7 +5,7 @@ import CustomerLoginPopup from "../customerviews/CustomerLoginPopup";
 import "./ProductCatalog.css";
 
 const LOW_STOCK_THRESHOLD = 5;
-const STOCK_REFRESH_INTERVAL = 10000;
+
 const ZOOM = 2.5;
 
 function ProductCatalog({ mode = "inner", propCid = null }) {
@@ -48,8 +48,8 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
   // PRODUCTS, CATEGORIES & STOCK
   const [plist, setPList] = useState([]);
   const [pcatglist, setPCatgList] = useState([]);
-  const [stockMap, setStockMap] = useState({});
-  const [initialStockMap, setInitialStockMap] = useState({});
+ 
+  
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   // CART
@@ -97,49 +97,31 @@ function ProductCatalog({ mode = "inner", propCid = null }) {
     }
   }, [mode, API]);
 
-  // STOCK HANDLING
-  const reloadStock = async () => {
-    const map = {};
-    for (const p of plist) {
-      try {
-        const res = await axios.get(`${API}/inventory/inventorybyproduct/${p.pid}`);
-        map[p.pid] = (res.data || []).reduce((s, i) => s + (i.stock || 0), 0);
-      } catch {
-        map[p.pid] = 0;
-      }
-    }
-    setStockMap(map);
-    setInitialStockMap((prev) => (Object.keys(prev).length ? prev : map));
-  };
-
-  useEffect (() => {
-    if (!plist.length || isCheckingOut) return;
-    reloadStock();
-    const id = setInterval(() => {
-      if (!isCheckingOut) reloadStock();
-    }, STOCK_REFRESH_INTERVAL);
-    return () => clearInterval(id);
-  }, [plist, isCheckingOut]);
-
-  // CART ACTIONS
+ // CART ACTIONS
 const handleBuyButton = (pid) => {
-  const maxStock = stockMap[pid] ?? 0;
-
-  if (maxStock <= 0) {
-    alert("Out of stock");
-    return;
-  }
 
   const product = plist.find((p) => p.pid === pid);
 
-  setSelItems((items) =>
-    items.find((i) => i.pid === pid)
-      ? items
-      : [...items, product]
-  );
+  if (!product) return;
 
-  setQuantities((q) => ({
-    ...q,
+  const maxStock = product.stock || 0;
+
+  if (maxStock <= 0) {
+    alert("Out of Stock");
+    return;
+  }
+
+  const alreadyAdded = selitems.find((i) => i.pid === pid);
+
+  if (alreadyAdded) {
+    increaseQty(pid);
+    return;
+  }
+
+  setSelItems((prev) => [...prev, product]);
+
+  setQuantities((prev) => ({
+    ...prev,
     [pid]: 1,
   }));
 
@@ -147,7 +129,9 @@ const handleBuyButton = (pid) => {
 };
   const increaseQty = (pid) => {
     const currentQty = quantities[pid] || 0;
-    const maxStock = initialStockMap[pid] ?? 0;
+   const product = plist.find((p) => p.pid === pid);
+
+const maxStock = product?.stock || 0;
     if (currentQty >= maxStock) return alert("Stock limit reached");
     setQuantities((q) => ({ ...q, [pid]: currentQty + 1 }));
     setItemCount((c) => c + 1);
@@ -201,7 +185,7 @@ const handleCheckout = async () => {
       "Stock changed"
     );
 
-    await reloadStock();
+    // await reloadStock();
   } finally {
     setIsCheckingOut(false);
   }
@@ -212,17 +196,64 @@ const handleCheckout = async () => {
   );
 
   const filteredProducts = plist.filter((p) => {
-    const stock = stockMap[p.pid] ?? 0;
-    if (searchText && !p.pname.toLowerCase().includes(searchText.toLowerCase())) return false;
-    if (categoryId !== "all" && String(p.pcatgid) !== categoryId) return false;
-    if (minPrice && Number(p.oprice) < Number(minPrice)) return false;
-    if (maxPrice && Number(p.oprice) > Number(maxPrice)) return false;
-    if (stockFilter === "in" && stock <= 0) return false;
-    if (stockFilter === "low" && !(stock > 0 && stock <= LOW_STOCK_THRESHOLD)) return false;
-    if (stockFilter === "out" && stock > 0) return false;
-    return true;
-  });
+  const qty = quantities[p.pid] || 0;
+  const stock = p.stock || 0;
+  const lowStock =
+    stock > 0 &&
+    stock <= LOW_STOCK_THRESHOLD;
 
+
+  if (
+    searchText &&
+    !p.pname.toLowerCase().includes(searchText.toLowerCase())
+  ) {
+    return false;
+  }
+
+  if (
+    categoryId !== "all" &&
+    String(p.pcatgid) !== categoryId
+  ) {
+    return false;
+  }
+
+  if (
+    minPrice &&
+    Number(p.oprice) < Number(minPrice)
+  ) {
+    return false;
+  }
+
+  if (
+    maxPrice &&
+    Number(p.oprice) > Number(maxPrice)
+  ) {
+    return false;
+  }
+
+  if (
+    stockFilter === "in" &&
+    stock <= 0
+  ) {
+    return false;
+  }
+
+  if (
+    stockFilter === "low" &&
+    !(stock > 0 && stock <= LOW_STOCK_THRESHOLD)
+  ) {
+    return false;
+  }
+
+  if (
+    stockFilter === "out" &&
+    stock > 0
+  ) {
+    return false;
+  }
+
+  return true;
+});
   return (
     <>
       {showBill && (
@@ -233,13 +264,20 @@ const handleCheckout = async () => {
     setShowBill(false);
     setShowLogin(true);
   }}
-  onPaymentSuccess={async () => {
-    setSelItems([]);
-    setQuantities({});
-    setItemCount(0);
-    setShowBill(false);
-    await reloadStock();
-  }}
+ onPaymentSuccess={async () => {
+  setSelItems([]);
+  setQuantities({});
+  setItemCount(0);
+  setShowBill(false);
+
+  const res = await axios.get(`${API}/product/showproduct`);
+
+  setPList(
+    (res.data || []).filter(
+      (p) => p.status === "Active"
+    )
+  );
+}}
 />
       )}
 
@@ -351,7 +389,7 @@ const handleCheckout = async () => {
           <section className="product-list">
             {filteredProducts.map((p) => {
               const qty = quantities[p.pid] || 0;
-              const stock = stockMap[p.pid] ?? 0;
+            const stock = p.stock || 0;
               const lowStock = stock > 0 && stock <= LOW_STOCK_THRESHOLD;
               return (
                 <div className="product-card" key={p.pid}>
@@ -430,46 +468,93 @@ const handleCheckout = async () => {
           </div>
         </>
       )}
+{/* PRODUCT POPUP */}
+{showProductPopup && selectedProduct && (
+  <div
+    className="product-popup-overlay"
+    onClick={() => setShowProductPopup(false)}
+  >
+    <div
+      className="product-popup"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="popup-close-button"
+        onClick={() => setShowProductPopup(false)}
+      >
+        X
+      </button>
 
-      {/* PRODUCT POPUP */}
-      {showProductPopup && selectedProduct && (
-        <div className="product-popup-overlay" onClick={() => setShowProductPopup(false)}>
-          <div className="product-popup" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="popup-close-button"
-              onClick={() => setShowProductPopup(false)}
-            >
-              X
-            </button>
-            <div className="popup-zoom-layout">
-              <div
-                className="popup-image-container"
-                onMouseMove={handleZoomMove}
-                onMouseLeave={hideZoom}
-              >
-                <img
-                  ref={imgRef}
-                  src={selectedProduct.ppicname}
-                  alt={selectedProduct.pname}
-                  className="product-popup-img"
-                />
-                <div ref={zoomRef} className="popup-zoom-panel" />
-              </div>
-              <h2>{selectedProduct.pname}</h2>
-              <p className="popup-price">₹{selectedProduct.oprice}</p>
-              <button
-                className="buy popup-buy-btn"
-                onClick={() => {
-                  handleBuyButton(selectedProduct.pid);
-                  setShowProductPopup(false);
-                }}
-              >
-                ADD TO BAG
-              </button>
-            </div>
-          </div>
+      <div className="popup-zoom-layout">
+        <div
+          className="popup-image-container"
+          onMouseMove={handleZoomMove}
+          onMouseLeave={hideZoom}
+        >
+          <img
+            ref={imgRef}
+            src={selectedProduct.ppicname}
+            alt={selectedProduct.pname}
+            className="product-popup-img"
+          />
+
+          <div
+            ref={zoomRef}
+            className="popup-zoom-panel"
+          />
         </div>
-      )}
+
+        <h2>{selectedProduct.pname}</h2>
+
+        <p className="popup-price">
+          ₹{selectedProduct.oprice}
+        </p>
+
+        <p
+          style={{
+            color:
+              (selectedProduct.stock || 0) > 0
+                ? "green"
+                : "red",
+            fontWeight: "bold",
+          }}
+        >
+          {(selectedProduct.stock || 0) > 0
+            ? `Stock : ${selectedProduct.stock}`
+            : "Out of Stock"}
+        </p>
+
+        {(selectedProduct.stock || 0) > 0 &&
+          (selectedProduct.stock || 0) <=
+            LOW_STOCK_THRESHOLD && (
+            <p
+              style={{
+                color: "orange",
+                fontWeight: "bold",
+              }}
+            >
+              Hurry! Only {selectedProduct.stock} left
+            </p>
+          )}
+
+        <button
+          className="buy popup-buy-btn"
+          disabled={
+            (selectedProduct.stock || 0) === 0
+          }
+          onClick={() => {
+            handleBuyButton(selectedProduct.pid);
+            setShowProductPopup(false);
+          }}
+        >
+          {(selectedProduct.stock || 0) === 0
+            ? "Out of Stock"
+            : "ADD TO BAG"}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
       {/* FILTER OVERLAY */}
       {showFilters && <div className="filter-overlay" onClick={() => setShowFilters(false)} />}

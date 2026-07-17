@@ -16,6 +16,7 @@ import CustomerLogin from "./customerviews/CustomerLogin";
 import CustomerReg from "./customerviews/CustomerReg";
 import CustomerHome from "./customerviews/CustomerHome";
 import ProductCatalog from "./productviews/ProductCatalog";
+import Checkout from "./customerviews/Checkout";
 // VENDOR
 import VenderMain from "./venderviews/VenderMain";
 import VenderLogin from "./venderviews/VenderLogin";
@@ -50,6 +51,7 @@ function App() {
   <Route path="customerlogin" element={<CustomerLogin />} />
   <Route path="customerreg" element={<CustomerReg />} />
   <Route path="customerhome" element={<CustomerHome />} />
+  <Route path="checkout" element={<Checkout />} />
 </Route>
 
         {/* VENDOR */}
