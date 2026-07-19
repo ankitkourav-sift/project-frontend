@@ -77,7 +77,7 @@ if (!user) {
 
       <div className="sidebar">
 
-        <h2>KouravKart</h2>
+        <h2>ShopNexa</h2>
 
         <button onClick={() => setShowEdit(true)}>
           <FaUserEdit /> Profile
