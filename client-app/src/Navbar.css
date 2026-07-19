@@ -1,82 +1,394 @@
-/* 🔥 NAVBAR */
-.navbar {
-  width: 100%;
-  height: 70px;
-  padding: 0 40px;
+/* ===========================
+   GOOGLE FONT
+=========================== */
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-  position: sticky;
-  top: 0;
-  z-index: 999;
-
-  background: #111;
-  color: white;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-/* 🔥 LOGO */
-.logo-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar{
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 50px;
+
+    backdrop-filter:blur(18px);
+
+    background:rgba(255,255,255,.85);
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,.08);
+
+    transition:.4s;
 }
 
-.logo-circle {
-  width: 40px;
-  height: 40px;
+/* ===========================
+   DARK MODE
+=========================== */
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.navbar.dark{
 
-  border-radius: 50%;
-  font-weight: bold;
-  font-size: 16px;
+background:#121212;
 
-  background: linear-gradient(45deg, orange, red);
-  color: white;
+color:white;
+
 }
 
-.logo-box h2 {
-  font-size: 22px;
-  font-weight: 700;
+.navbar.accent{
+
+background:linear-gradient(135deg,#5f2eea,#7f5af0);
+
+color:white;
+
 }
 
-/* 🔥 LINKS */
-.nav-links {
-  display: flex;
-  gap: 25px;
+/* ===========================
+   LOGO
+=========================== */
+
+.navbar-logo{
+
+display:flex;
+
+align-items:center;
+
+gap:16px;
+
+cursor:pointer;
+
+user-select:none;
+
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-size: 15px;
-  transition: 0.3s;
+/* ===========================
+   ICON
+=========================== */
+
+.logo-circle{
+
+width:68px;
+
+height:68px;
+
+border-radius:22px;
+
+background:linear-gradient(135deg,#ff512f,#dd2476,#6a11cb);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:34px;
+
+font-weight:800;
+
+color:white;
+
+box-shadow:
+
+0 12px 30px rgba(106,17,203,.45);
+
+transition:.45s;
+
 }
 
-.nav-links a:hover {
-  color: orange;
+.logo-circle:hover{
+
+transform:
+rotate(-12deg)
+scale(1.12);
+
+box-shadow:
+
+0 20px 40px rgba(255,81,47,.55);
+
 }
 
-/* 🔥 BUTTON */
-.theme-btn {
-  border: none;
-  padding: 8px 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  background: #222;
-  color: white;
-  font-size: 16px;
+/* ===========================
+   TEXT
+=========================== */
+
+.logo-text{
+
+display:flex;
+
+flex-direction:column;
+
 }
 
-/* 🔥 DARK MODE */
-.navbar.dark {
-  background: #000;
+.logo-text h1{
+
+font-size:34px;
+
+font-weight:800;
+
+background:linear-gradient(90deg,#ff512f,#dd2476,#6a11cb);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+letter-spacing:1px;
+
 }
 
-.navbar.accent {
-  background: linear-gradient(45deg, #111, #222);
+.logo-text span{
+
+font-size:12px;
+
+font-weight:600;
+
+letter-spacing:3px;
+
+text-transform:uppercase;
+
+color:#777;
+
+}
+
+.dark .logo-text span{
+
+color:#ccc;
+
+}
+
+.accent .logo-text span{
+
+color:white;
+
+}
+
+/* ===========================
+   NAV LINKS
+=========================== */
+
+.nav-links{
+
+display:flex;
+
+gap:35px;
+
+align-items:center;
+
+}
+
+.nav-links a{
+
+position:relative;
+
+text-decoration:none;
+
+font-size:17px;
+
+font-weight:600;
+
+color:#333;
+
+transition:.35s;
+
+}
+
+.dark .nav-links a{
+
+color:white;
+
+}
+
+.accent .nav-links a{
+
+color:white;
+
+}
+
+.nav-links a:hover{
+
+color:#6a11cb;
+
+}
+
+.dark .nav-links a:hover{
+
+color:#8b5cf6;
+
+}
+
+.accent .nav-links a:hover{
+
+color:#ffe082;
+
+}
+
+/* UNDERLINE */
+
+.nav-links a::after{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+
+bottom:-7px;
+
+width:0;
+
+height:3px;
+
+background:linear-gradient(90deg,#ff512f,#dd2476);
+
+transition:.4s;
+
+transform:translateX(-50%);
+
+border-radius:50px;
+
+}
+
+.nav-links a:hover::after{
+
+width:100%;
+
+}
+
+/* ===========================
+   THEME BUTTON
+=========================== */
+
+.theme-btn{
+
+width:52px;
+
+height:52px;
+
+border:none;
+
+border-radius:50%;
+
+cursor:pointer;
+
+font-size:22px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:linear-gradient(135deg,#6a11cb,#2575fc);
+
+color:white;
+
+box-shadow:
+
+0 8px 25px rgba(37,117,252,.4);
+
+transition:.4s;
+
+}
+
+.theme-btn:hover{
+
+transform:
+rotate(180deg)
+scale(1.1);
+
+box-shadow:
+
+0 12px 30px rgba(37,117,252,.6);
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+.navbar{
+
+padding:15px 20px;
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.nav-links{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:20px;
+
+}
+
+.logo-circle{
+
+width:58px;
+
+height:58px;
+
+font-size:28px;
+
+}
+
+.logo-text h1{
+
+font-size:28px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.logo-text span{
+
+display:none;
+
+}
+
+.nav-links{
+
+gap:15px;
+
+}
+
+.nav-links a{
+
+font-size:15px;
+
+}
+
+.theme-btn{
+
+width:45px;
+
+height:45px;
+
+font-size:18px;
+
+}
+
 }

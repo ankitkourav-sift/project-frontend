@@ -16,12 +16,18 @@ function Navbar() {
     <div className={`navbar ${mode}`}>
 
       {/* LOGO */}
-      <div className="nav-left">
-        <div className="logo-box">
-          <div className="logo-circle">KK</div>
-          <h2>KouravKart</h2>
-        </div>
-      </div>
+   <div className="navbar-logo">
+
+  <div className="logo-circle">
+        S
+    </div>
+
+
+  <div className="logo-text">
+    <h1>ShopNexa</h1>
+    <span>Smart Shopping Experience</span>
+  </div>
+</div>
 
       {/* LINKS (ONLY MAIN ROUTES) */}
       <div className="nav-links">

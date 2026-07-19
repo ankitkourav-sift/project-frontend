@@ -226,7 +226,8 @@ const [newAddress, setNewAddress] = useState({
     }
 
 
-    const amountInPaisa = Math.round(totalAmount * 100);
+   const amountInPaisa = Math.round(finalAmount * 100);
+
 
     const orderRes = await axios.post(
       "https://project-backend-nka5.vercel.app/payment/orders",
@@ -248,7 +249,7 @@ const [newAddress, setNewAddress] = useState({
         try {
 
           // 🔥 FIXED ROUTE HERE (IMPORTANT)
-    await axios.post(
+   await axios.post(
   "https://project-backend-nka5.vercel.app/order/payment-success",
   {
     razorpayPaymentId: response.razorpay_payment_id,
@@ -273,7 +274,8 @@ const [newAddress, setNewAddress] = useState({
     deliveryType,
     paymentMethod: "Online",
 
-    amount: amount / 100,
+    amount: finalAmount,
+    deliveryCharge,
 
     items: items.map((it) => ({
       pid: it.pid,
